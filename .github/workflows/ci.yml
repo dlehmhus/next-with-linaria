@@ -38,9 +38,9 @@ jobs:
       working-directory: ./tests/example
 
     - name: Install playwright browser
-      run: pnpm exec playwright install-deps chromium
+      run: pnpm exec playwright install --with-deps chromium
       working-directory: ./tests/example/apps/nextjs
 
-    - name: Build package
+    - name: Run tests
       run: pnpm run test
     
