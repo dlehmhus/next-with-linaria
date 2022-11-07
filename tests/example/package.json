@@ -1,0 +1,13 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "pnpm --filter example-project test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

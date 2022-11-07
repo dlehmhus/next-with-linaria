@@ -1,0 +1,46 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        node: [16]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 7
+        
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+
+    - name: Install package dependencies
+      run: pnpm install --frozen-lockfile
+
+    - name: Build package
+      run: pnpm run build
+
+    - name: Install test dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: ./tests/example
+
+    - name: Install playwright browser
+      run: pnpm exec playwright install-deps chromium
+      working-directory: ./tests/example/apps/nextjs
+
+    - name: Build package
+      run: pnpm run test
+    

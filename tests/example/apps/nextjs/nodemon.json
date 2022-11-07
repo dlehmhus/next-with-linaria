@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "watch": ["next.config.js", "../../../../lib/"],
+  "exec": "pnpm exec next dev",
+  "ignore": [".next/"]
+}

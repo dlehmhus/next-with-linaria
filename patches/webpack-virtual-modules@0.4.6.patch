@@ -1,0 +1,19 @@
+diff --git a/lib/index.js b/lib/index.js
+index 437c2b015be0880e2081eef5ab75d6205e407d38..573fd07f12ede281848760e7464724f31a0bb290 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -92,11 +92,12 @@ class VirtualModulesPlugin {
+     constructor(modules) {
+         this._compiler = null;
+         this._watcher = null;
+-        this._staticModules = modules || null;
++        this._staticModules = modules || {};
+     }
+     writeModule(filePath, contents) {
+         if (!this._compiler) {
+-            throw new Error(`Plugin has not been initialized`);
++            this._staticModules[filePath] = contents;
++            return;
+         }
+         checkActivation(this);
+         const len = contents ? contents.length : 0;

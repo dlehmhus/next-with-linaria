@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "lib": ["es2016"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "pretty": true,
+    "strict": true,
+    "removeComments": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["lib"],
+  "include": ["src/**/*", "types/**/*"]
+}

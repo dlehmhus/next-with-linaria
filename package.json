@@ -1,0 +1,74 @@
+{
+  "name": "next-with-linaria",
+  "version": "0.1.0",
+  "description": "Linaria support for Next.js 13 app directory feature",
+  "main": "lib/webpackConfig.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rm -rf lib",
+    "lint": "eslint --fix src/**",
+    "test": "pnpm test --filter ./tests/example"
+  },
+  "packageManager": "pnpm@7.14.0",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-typescript-sort-keys": "^2.1.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "is-ci": "3.0.1",
+    "lint-staged": "13.0.3",
+    "next": "^13.0.2",
+    "prettier": "^2.7.1",
+    "simple-git-hooks": "2.8.1",
+    "typescript": "^4.8.4",
+    "webpack": "^5.74.0"
+  },
+  "peerDependencies": {
+    "webpack": "^5.74.0"
+  },
+  "dependencies": {
+    "@linaria/babel-preset": "^4.3.0",
+    "file-system-cache": "2.0.1",
+    "webpack-virtual-modules": "0.4.6"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "webpack-virtual-modules@0.4.6": "patches/webpack-virtual-modules@0.4.6.patch"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "**/*.(js|jsx|ts|tsx)": [
+      "eslint --fix"
+    ],
+    "**/*.(js|jsx|ts|tsx|json|css|md|mdx)": [
+      "prettier --write"
+    ]
+  },
+  "author": "Dario Lehmhus",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlehmhus/next-with-linaria.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dlehmhus/next-with-linaria/issues"
+  },
+  "homepage": "https://github.com/dlehmhus/next-with-linaria#readme",
+  "keywords": [
+    "linaria",
+    "next",
+    "next.js",
+    "css"
+  ]
+}
