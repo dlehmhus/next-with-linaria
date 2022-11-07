@@ -8,7 +8,8 @@
     "watch": "tsc -w",
     "clean": "rm -rf lib",
     "lint": "eslint --fix src/**",
-    "test": "pnpm test --filter ./tests/example"
+    "test": "pnpm test --filter ./tests/example",
+    "prepublish": "pnpm run clean && pnpm run build"
   },
   "packageManager": "pnpm@7.14.0",
   "devDependencies": {
