@@ -1,9 +1,9 @@
 import Cache, { type FileSystemCache } from 'file-system-cache';
 import path from 'path';
 import type * as Webpack from 'webpack';
-import VirtualModulesPlugin from 'webpack-virtual-modules';
 
 import { isFSCache } from './utils';
+import VirtualModulesPlugin from './webpack-virtual-modules';
 
 type CachedFile = {
   path: string;

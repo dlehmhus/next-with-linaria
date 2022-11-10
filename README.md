@@ -2,7 +2,7 @@
 
 ## What is this?
 
-The new Next.js 13 app directory feature doesn't work with the [@linaria/webpack5-loader](https://github.com/callstack/linaria/tree/master/packages/webpack5-loader) anymore, therefore the [next-linaria](https://github.com/Mistereo/next-linaria) package sadly also doesn't work. This package tries to solve that issue with a custom linaria webpack loader and [Webpack Virtual Modules](https://github.com/sysgears/webpack-virtual-modules).
+The new Next.js 13 app directory feature doesn't work with the [@linaria/webpack5-loader](https://github.com/callstack/linaria/tree/master/packages/webpack5-loader) anymore, therefore the [next-linaria](https://github.com/Mistereo/next-linaria) package sadly also doesn't work. This package solves that issue with a custom linaria webpack loader and [Webpack Virtual Modules](https://github.com/sysgears/webpack-virtual-modules).
 
 ## Disclaimer
 

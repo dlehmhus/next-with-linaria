@@ -1,10 +1,5 @@
 lockfileVersion: 5.4
 
-patchedDependencies:
-  webpack-virtual-modules@0.4.6:
-    hash: aebn33dqwkfk4mi4cr2zdj7mca
-    path: patches/webpack-virtual-modules@0.4.6.patch
-
 specifiers:
   '@linaria/babel-preset': 4.3.0
   '@typescript-eslint/eslint-plugin': 5.42.1
@@ -23,11 +18,9 @@ specifiers:
   simple-git-hooks: 2.8.1
   typescript: 4.8.4
   webpack: 5.75.0
-  webpack-virtual-modules: 0.4.6
 
 dependencies:
   file-system-cache: 2.0.1
-  webpack-virtual-modules: 0.4.6_aebn33dqwkfk4mi4cr2zdj7mca
 
 devDependencies:
   '@linaria/babel-preset': 4.3.0
@@ -3745,11 +3738,6 @@ packages:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
     dev: true
-
-  /webpack-virtual-modules/0.4.6_aebn33dqwkfk4mi4cr2zdj7mca:
-    resolution: {integrity: sha512-5tyDlKLqPfMqjT3Q9TAqf2YqjwmnUleZwzJi1A5qXnlBCdj2AtOJ6wAWdglTIDOPgOiOrXeBeFcsQ8+aGQ6QbA==}
-    dev: false
-    patched: true
 
   /webpack/5.75.0:
     resolution: {integrity: sha512-piaIaoVJlqMsPtX/+3KTTO6jfvrSYgauFVdt8cr9LTHKmcq/AMd4mhzsiP7ZF/PGRNPGA8336jldh9l2Kt2ogQ==}
