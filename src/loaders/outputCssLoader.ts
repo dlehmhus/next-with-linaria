@@ -3,7 +3,7 @@
 
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from './VirtualModuleStore';
+import VirtualModuleStore from '../VirtualModuleStore';
 
 type OutputLoaderOptions = {
   moduleStore: VirtualModuleStore;
