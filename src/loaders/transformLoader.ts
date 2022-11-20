@@ -16,7 +16,7 @@ import { transform } from '@linaria/babel-preset';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from './VirtualModuleStore';
+import VirtualModuleStore from '../VirtualModuleStore';
 
 export const LINARIA_MODULE_EXTENSION = '.linaria.module';
 export const LINARIA_GLOBAL_EXTENSION = '.linaria.global';

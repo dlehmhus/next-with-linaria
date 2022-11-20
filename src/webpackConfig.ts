@@ -7,7 +7,8 @@ import {
   LinariaLoaderOptions,
   regexLinariaCSS,
   regexLinariaGlobalCSS,
-} from './transformLoader';
+} from './loaders/transformLoader';
+import { ErrorPlugin } from './plugins/errorPlugin';
 import { isCssLoader, isCssModule } from './utils';
 import VirtualModuleStore from './VirtualModuleStore';
 
@@ -78,6 +79,9 @@ export default function withLinaria({
       }
       config.plugins.push(moduleStore.createStore(config.name));
 
+      // Show message when linaria cache is out of sync with webpack
+      config.plugins.push(new ErrorPlugin());
+
       // Add css output loader with access to the module store
       // in order to set the correct dependencies
       config.module.rules.push({
@@ -85,7 +89,7 @@ export default function withLinaria({
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(__dirname, './outputCssLoader'),
+            loader: path.resolve(__dirname, './loaders/outputCssLoader'),
             options: {
               moduleStore,
             },
@@ -108,7 +112,7 @@ export default function withLinaria({
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(__dirname, './transformLoader'),
+            loader: path.resolve(__dirname, './loaders/transformLoader'),
             options: linariaLoaderOptions,
           },
         ],
