@@ -119,13 +119,15 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
             isGlobalStyle ? '' : LINARIA_MODULE_EXTENSION
           }.css`;
 
-          const fullPathToFile = path.join(fileDir, cssModuleName);
+          const fullPathToModule = path.join(fileDir, cssModuleName);
 
-          moduleStore.addModule(fullPathToFile, cssText);
-          moduleStore.addModuleDependencies(
-            fullPathToFile,
-            this.getDependencies(),
-          );
+          await Promise.all([
+            moduleStore.addModule(fullPathToModule, cssText),
+            moduleStore.addModuleDependencies(
+              fullPathToModule,
+              this.getDependencies(),
+            ),
+          ]);
 
           this.callback(
             null,
