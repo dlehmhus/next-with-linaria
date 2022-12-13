@@ -31,8 +31,7 @@
     "webpack": "5.75.0"
   },
   "peerDependencies": {
-    "@linaria/babel-preset": "4.x",
-    "webpack": "5.x"
+    "@linaria/babel-preset": "4.x"
   },
   "dependencies": {
     "file-system-cache": "2.0.1"
