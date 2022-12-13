@@ -47,4 +47,11 @@ jobs:
 
     - name: Run tests
       run: pnpm run test
+
+    - name: Upload test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: playwright-report
+        path: tests/example/apps/nextjs/test-results
     
