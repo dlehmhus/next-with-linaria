@@ -13,9 +13,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
         node: [16]
     steps:
+    - name: Prepare git on Windows
+      if: matrix.os == 'windows-latest'
+      run: git config --global core.autocrlf false
+
     - uses: actions/checkout@v3
     - uses: pnpm/action-setup@v2.2.4
       with:
@@ -43,4 +47,11 @@ jobs:
 
     - name: Run tests
       run: pnpm run test
+
+    - name: Upload test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: playwright-report
+        path: tests/example/apps/nextjs/test-results
     

@@ -115,20 +115,23 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
           const fileDir = path.dirname(this.resourcePath);
           const isGlobalStyle = filename.endsWith(LINARIA_GLOBAL_EXTENSION);
 
-          const outputFileName = path.join(
-            fileDir,
-            `${filename}${isGlobalStyle ? '' : LINARIA_MODULE_EXTENSION}.css`,
-          );
+          const cssModuleName = `${filename}${
+            isGlobalStyle ? '' : LINARIA_MODULE_EXTENSION
+          }.css`;
 
-          moduleStore.addModule(outputFileName, cssText);
-          moduleStore.addModuleDependencies(
-            outputFileName,
-            this.getDependencies(),
-          );
+          const fullPathToModule = path.join(fileDir, cssModuleName);
+
+          await Promise.all([
+            moduleStore.addModule(fullPathToModule, cssText),
+            moduleStore.addModuleDependencies(
+              fullPathToModule,
+              this.getDependencies(),
+            ),
+          ]);
 
           this.callback(
             null,
-            `${result.code}\n\nrequire("${outputFileName}");`,
+            `${result.code}\n\nrequire("./${cssModuleName}");`,
             result.sourceMap ?? undefined,
           );
         } catch (err) {

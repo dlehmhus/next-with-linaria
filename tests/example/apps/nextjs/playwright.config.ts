@@ -23,6 +23,7 @@ const config: PlaywrightTestConfig = {
   outputDir: path.join(__dirname, 'test-results'),
   testDir: path.join(__dirname, 'e2e'),
   workers: isCI ? 2 : undefined,
+  reporter: process.env.CI ? 'github' : 'list',
   webServer: {
     command: webServer.command,
     port: port,
@@ -30,6 +31,7 @@ const config: PlaywrightTestConfig = {
   },
   use: {
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
