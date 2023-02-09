@@ -34,7 +34,7 @@
     "@linaria/babel-preset": "4.x"
   },
   "dependencies": {
-    "file-system-cache": "2.0.1"
+    "file-system-cache": "2.0.2"
   },
   "files": [
     "lib"

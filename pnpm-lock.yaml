@@ -10,7 +10,7 @@ specifiers:
   eslint-plugin-simple-import-sort: 8.0.0
   eslint-plugin-typescript-sort-keys: 2.1.0
   eslint-plugin-unused-imports: 2.0.0
-  file-system-cache: 2.0.1
+  file-system-cache: 2.0.2
   is-ci: 3.0.1
   lint-staged: 13.0.3
   next: 13.0.4
@@ -20,7 +20,7 @@ specifiers:
   webpack: 5.75.0
 
 dependencies:
-  file-system-cache: 2.0.1
+  file-system-cache: 2.0.2
 
 devDependencies:
   '@linaria/babel-preset': 4.3.0
@@ -2493,10 +2493,10 @@ packages:
       flat-cache: 3.0.4
     dev: true
 
-  /file-system-cache/2.0.1:
-    resolution: {integrity: sha512-ypttSkXKUUEOSNU7qxmtlN/3wiFihpFdH9c7YZ/bYYepNN/+2moCI4TXIFpFWslRAb/Bzl0vyfTvYcHLqqpxfA==}
+  /file-system-cache/2.0.2:
+    resolution: {integrity: sha512-lp4BHO4CWqvRyx88Tt3quZic9ZMf4cJyquYq7UI8sH42Bm2ArlBBjKQAalZOo+UfaBassb7X123Lik5qZ/tSAA==}
     dependencies:
-      fs-extra: 10.1.0
+      fs-extra: 11.1.0
       ramda: 0.28.0
     dev: false
 
@@ -2527,9 +2527,9 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
-  /fs-extra/10.1.0:
-    resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
-    engines: {node: '>=12'}
+  /fs-extra/11.1.0:
+    resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
+    engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.10
       jsonfile: 6.1.0
