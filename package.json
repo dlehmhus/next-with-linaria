@@ -1,6 +1,6 @@
 {
   "name": "next-with-linaria",
-  "version": "0.3.1",
+  "version": "0.3.2-canary.0",
   "description": "Linaria support for Next.js 13 app directory feature",
   "main": "lib/webpackConfig.js",
   "scripts": {
@@ -13,28 +13,28 @@
   },
   "packageManager": "pnpm@7.14.0",
   "devDependencies": {
-    "@linaria/babel-preset": "4.3.0",
-    "@typescript-eslint/eslint-plugin": "5.43.0",
-    "@typescript-eslint/parser": "5.43.0",
-    "eslint": "8.28.0",
-    "eslint-config-prettier": "8.5.0",
+    "@linaria/babel-preset": "4.4.1",
+    "@typescript-eslint/eslint-plugin": "5.51.0",
+    "@typescript-eslint/parser": "5.51.0",
+    "eslint": "8.33.0",
+    "eslint-config-prettier": "8.6.0",
     "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-simple-import-sort": "8.0.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
     "eslint-plugin-unused-imports": "2.0.0",
     "is-ci": "3.0.1",
-    "lint-staged": "13.0.3",
-    "next": "13.0.4",
-    "prettier": "2.7.1",
+    "lint-staged": "13.1.1",
+    "next": "13.1.6",
+    "prettier": "2.8.4",
     "simple-git-hooks": "2.8.1",
-    "typescript": "4.9.3",
+    "typescript": "4.9.5",
     "webpack": "5.75.0"
   },
   "peerDependencies": {
     "@linaria/babel-preset": "4.x"
   },
   "dependencies": {
-    "file-system-cache": "2.0.1"
+    "file-system-cache": "2.0.2"
   },
   "files": [
     "lib"
