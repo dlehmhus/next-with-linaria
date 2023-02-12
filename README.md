@@ -100,6 +100,16 @@ export default function RootLayout({
 
 This convention is needed because the loader needs to know which files contain global styles and which don't.
 
+## Config
+
+For details on the config options, see the [Linaria Config](https://github.com/callstack/linaria/blob/master/docs/CONFIGURATION.md).
+
+### Plugin specific config
+
+`enableInMemoryCache` (default: `true`).
+
+If set to `true`, the loader will generate a hash for the file content and store the transformed code in memory and only re-run the transformation if the file has changed. This can increase performance when working with large files. However, hashing the file content, even though it is pretty fast compared to the transformation, can still take some time. If you are experiencing performance or memory issues, you can disable this feature.
+
 ## Good to know
 
 Because webpack 5 caches modules, the virtual CSS Modules need to be cached as well (so at that point the are not really virtual anymore, are they? Anyway...). They are placed in the same directory as where webpack puts its cache files. If the `next-with-linaria` cache is not in sync with the webpack cache anymore, it will cause errors due to missing CSS Modules. If you encounter such an error, you can delete the `.next/cache/webpack` folder and restart the dev server.
