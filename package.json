@@ -11,7 +11,7 @@
     "test": "pnpm test --filter ./tests/example",
     "prepublish": "pnpm run clean && pnpm run build"
   },
-  "packageManager": "pnpm@7.14.0",
+  "packageManager": "pnpm@7.27.1",
   "devDependencies": {
     "@linaria/babel-preset": "4.4.3",
     "@typescript-eslint/eslint-plugin": "5.53.0",
