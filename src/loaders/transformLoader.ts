@@ -6,13 +6,13 @@
  * It uses the transform.ts function to generate class names from source code,
  * returns transformed code without template literals and attaches generated source maps
  */
+
 import type {
   PluginOptions,
   Preprocessor,
   Result,
 } from '@linaria/babel-preset';
 import { transform } from '@linaria/babel-preset';
-import crypto from 'crypto';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
@@ -26,15 +26,6 @@ export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
 export type LinariaLoaderOptions = {
-  /**
-   * Enable in-memory cache for transformed code.
-   * This can increase performance when working with big files.
-   * However, the downside is that every file needs to be hashed and
-   * is stored in memory. Disable this if you are experiencing memory issues.
-   *
-   * @default true
-   */
-  enableInMemoryCache?: boolean;
   moduleStore: VirtualModuleStore;
   preprocessor?: Preprocessor;
   sourceMap?: boolean;
@@ -60,43 +51,16 @@ function convertSourceMap(
   };
 }
 
-/**
- * In-Memory cache for the transformed code.
- */
-const cache = new Map<
-  string,
-  {
-    code: string;
-    hash: string;
-    sourceMap: string | undefined | any;
-  }
->();
-
 const transformLoader: LoaderType = function (content, inputSourceMap) {
+  // tell Webpack this loader is async
+  this.async();
+
   const {
     sourceMap = undefined,
     preprocessor = undefined,
     moduleStore,
-    enableInMemoryCache = true,
     ...rest
   } = this.getOptions() || {};
-
-  let contentHash;
-  if (enableInMemoryCache) {
-    // create md5 hash of the file content
-    contentHash = crypto.createHash('md5').update(content).digest('hex');
-
-    // Check if we have a cached version of the transformed code
-    // so we don't have to re-run the transform if the file hasn't changed
-    const cacheEntry = cache.get(this.resourcePath);
-    if (cacheEntry?.hash === contentHash) {
-      this.callback(null, cacheEntry?.code, cacheEntry?.sourceMap);
-      return;
-    }
-  }
-
-  // tell Webpack this loader is async
-  this.async();
 
   const asyncResolve = (token: string, importer: string): Promise<string> => {
     const context = path.isAbsolute(importer)
@@ -165,17 +129,11 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
             ),
           ]);
 
-          const code = `${result.code}\n\nrequire("./${cssModuleName}");`;
-
-          if (enableInMemoryCache) {
-            cache.set(this.resourcePath, {
-              code,
-              hash: contentHash,
-              sourceMap: result.sourceMap,
-            });
-          }
-
-          this.callback(null, code, result.sourceMap || undefined);
+          this.callback(
+            null,
+            `${result.code}\n\nrequire("./${cssModuleName}");`,
+            result.sourceMap ?? undefined,
+          );
         } catch (err) {
           this.callback(err as Error);
         }
@@ -183,15 +141,7 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
         return;
       }
 
-      if (enableInMemoryCache) {
-        cache.set(this.resourcePath, {
-          code: result.code,
-          hash: contentHash,
-          sourceMap: result.sourceMap,
-        });
-      }
-
-      this.callback(null, result.code, result.sourceMap || undefined);
+      this.callback(null, result.code, result.sourceMap ?? undefined);
     },
     (err: Error) => this.callback(err),
   );
