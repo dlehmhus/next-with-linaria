@@ -28,9 +28,9 @@ export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 export type LinariaLoaderOptions = {
   /**
    * Enable in-memory cache for transformed code.
-   * This can increase performance when working with big files.
-   * However, the downside is that every file needs to be hashed and
-   * is stored in memory. Disable this if you are experiencing memory issues.
+   * This can increase performance gains when working with big files.
+   * However, downside is that every file needs to be hashed and
+   * stored in memory.
    *
    * @default true
    */
