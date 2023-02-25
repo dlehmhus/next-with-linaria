@@ -14,44 +14,43 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        node: [16]
+        node: [16, 18]
     steps:
-    - name: Prepare git on Windows
-      if: matrix.os == 'windows-latest'
-      run: git config --global core.autocrlf false
+      - name: Prepare git on Windows
+        if: matrix.os == 'windows-latest'
+        run: git config --global core.autocrlf false
 
-    - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2.2.4
-      with:
-        version: 7
-        
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
 
-    - name: Install package dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-    - name: Build package
-      run: pnpm run build
+      - name: Install package dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Install test dependencies
-      run: pnpm install --frozen-lockfile
-      working-directory: ./tests/example
+      - name: Build package
+        run: pnpm run build
 
-    - name: Install playwright browser
-      run: pnpm exec playwright install --with-deps chromium
-      working-directory: ./tests/example/apps/nextjs
+      - name: Install test dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: ./tests/example
 
-    - name: Run tests
-      run: pnpm run test
+      - name: Install playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+        working-directory: ./tests/example/apps/nextjs
 
-    - name: Upload test results
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: playwright-report
-        path: tests/example/apps/nextjs/test-results
-    
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Upload test results
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: tests/example/apps/nextjs/test-results
