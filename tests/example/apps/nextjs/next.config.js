@@ -4,7 +4,7 @@ const withLinaria = require('../../../../');
 const config = {
   experimental: {
     appDir: true,
+    transpilePackages: ['ui-kit'],
   },
-  transpilePackages: ['ui-kit'],
 };
 module.exports = withLinaria(config);
