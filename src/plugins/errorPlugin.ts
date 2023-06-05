@@ -1,4 +1,3 @@
-import { existsSync, rmSync } from 'fs';
 import { Compiler, WebpackError } from 'webpack';
 
 import { isFSCache } from '../utils';
@@ -21,20 +20,8 @@ export class ErrorPlugin {
               (err) => !cssRegex.test(err.message),
             );
 
-            const { cache, mode } = stats.compilation.compiler.options;
-
-            let message =
-              '🔄 The Linaria cache seems to be out of sync with the webpack cache, let me fix that for you...\n\n';
-
-            if (mode === 'production') {
-              message += 'Please restart the build process!';
-            } else {
-              message += 'Please restart the dev server!';
-            }
-
-            if (cache.cacheDirectory && existsSync(cache.cacheDirectory)) {
-              rmSync(cache.cacheDirectory, { recursive: true, force: true });
-            }
+            const message =
+              '🔄 The Linaria cache seems to be out of sync with the webpack cache, please restart the server.\n For more details see: https://github.com/dlehmhus/next-with-linaria#good-to-know \n\n';
 
             stats.compilation.errors.push(new WebpackError(message));
           }
