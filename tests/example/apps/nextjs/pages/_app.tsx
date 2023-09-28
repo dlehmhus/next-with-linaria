@@ -1,5 +1,5 @@
 import '../styles/global.css';
-import '../styles/styles.linaria.global.tsx';
+import '../styles/styles.linaria.global';
 
 import type { AppProps } from 'next/app';
 

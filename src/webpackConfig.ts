@@ -51,7 +51,7 @@ function traverseLoaders(rules: Webpack.RuleSetRule[]) {
       traverseLoaders(Array.isArray(useRules) ? useRules : [useRules]);
     }
     if (Array.isArray(rule.oneOf)) {
-      traverseLoaders(rule.oneOf);
+      traverseLoaders(rule.oneOf as Webpack.RuleSetRule[]);
     }
   }
 }

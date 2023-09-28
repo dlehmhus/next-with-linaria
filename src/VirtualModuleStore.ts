@@ -12,6 +12,7 @@ type CachedFile = {
     path: string;
   };
 };
+
 export default class VirtualModuleStore {
   private vmInstances: Map<string, VirtualModulesPlugin> = new Map();
   private initialCachedFiles: Record<string, string> = {};
@@ -59,13 +60,13 @@ export default class VirtualModuleStore {
       vm.writeModule(path, content);
     });
     if (this.cssCache && addToCache) {
-      this.cssCache.set(path, { content, path });
+      this.cssCache.setSync(path, { content, path });
     }
   }
 
   public addModuleDependencies(modulePath: string, deps: string[]) {
     if (this.dependencyCache) {
-      this.dependencyCache.set(modulePath, deps);
+      this.dependencyCache.setSync(modulePath, deps);
     }
   }
 

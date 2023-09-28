@@ -1,61 +1,44 @@
 lockfileVersion: 5.4
 
-importers:
+specifiers:
+  '@linaria/babel-preset': 5.0.3
+  '@linaria/core': 5.0.2
+  '@linaria/react': 5.0.2
+  '@playwright/test': 1.38.1
+  '@types/node': 20.7.1
+  '@types/react': 18.2.23
+  '@types/react-dom': 18.2.8
+  cross-env: ^7.0.3
+  eslint: 8.50.0
+  eslint-config-next: 13.5.3
+  next: 13.5.3
+  nodemon: 3.0.1
+  pretty-ms: ^8.0.0
+  react: 18.2.0
+  react-dom: 18.2.0
+  typescript: 5.2.2
+  ui-kit: workspace:1.0.0
 
-  .:
-    specifiers: {}
+dependencies:
+  '@linaria/core': 5.0.2
+  '@linaria/react': 5.0.2_react@18.2.0
+  next: 13.5.3_pamseawcqpaoyqfggclsvtomea
+  pretty-ms: 8.0.0
+  react: 18.2.0
+  react-dom: 18.2.0_react@18.2.0
+  ui-kit: link:../../packages/ui-kit
 
-  apps/nextjs:
-    specifiers:
-      '@babel/runtime': 7.23.1
-      '@linaria/babel-preset': 5.0.3
-      '@linaria/core': 5.0.2
-      '@linaria/react': 5.0.2
-      '@playwright/test': 1.38.1
-      '@types/node': 20.7.1
-      '@types/react': 18.2.23
-      '@types/react-dom': 18.2.8
-      cross-env: 7.0.3
-      eslint: 8.50.0
-      eslint-config-next: 13.5.3
-      next: 13.5.3
-      nodemon: 3.0.1
-      pretty-ms: 8.0.0
-      react: 18.2.0
-      react-dom: 18.2.0
-      typescript: 5.2.2
-      ui-kit: workspace:1.0.0
-    dependencies:
-      '@linaria/core': 5.0.2
-      '@linaria/react': 5.0.2_react@18.2.0
-      next: 13.5.3_biqbaboplfbrettd7655fr4n2y
-      pretty-ms: 8.0.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      ui-kit: link:../../packages/ui-kit
-    devDependencies:
-      '@babel/runtime': 7.23.1
-      '@linaria/babel-preset': 5.0.3_typescript@5.2.2
-      '@playwright/test': 1.38.1
-      '@types/node': 20.7.1
-      '@types/react': 18.2.23
-      '@types/react-dom': 18.2.8
-      cross-env: 7.0.3
-      eslint: 8.50.0
-      eslint-config-next: 13.5.3_jk7qbkaijtltyu4ajmze3dfiwa
-      nodemon: 3.0.1
-      typescript: 5.2.2
-
-  packages/ui-kit:
-    specifiers:
-      '@linaria/core': ^5.0.2
-      '@linaria/react': ^5.0.2
-      react: 18.2.0
-    dependencies:
-      '@linaria/core': 5.0.2
-      '@linaria/react': 5.0.2_react@18.2.0
-    devDependencies:
-      react: 18.2.0
+devDependencies:
+  '@linaria/babel-preset': 5.0.3_typescript@5.2.2
+  '@playwright/test': 1.38.1
+  '@types/node': 20.7.1
+  '@types/react': 18.2.23
+  '@types/react-dom': 18.2.8
+  cross-env: 7.0.3
+  eslint: 8.50.0
+  eslint-config-next: 13.5.3_jk7qbkaijtltyu4ajmze3dfiwa
+  nodemon: 3.0.1
+  typescript: 5.2.2
 
 packages:
 
@@ -2255,7 +2238,7 @@ packages:
       eslint: 8.50.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1_o23aiopppmru2xcybrthvzqwfe
-      eslint-plugin-import: 2.28.1_7juwwq4lilwvkas6knc4dqepxq
+      eslint-plugin-import: 2.28.1_eslint@8.50.0
       eslint-plugin-jsx-a11y: 6.7.1_eslint@8.50.0
       eslint-plugin-react: 7.33.2_eslint@8.50.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.50.0
@@ -2286,7 +2269,7 @@ packages:
       enhanced-resolve: 5.15.0
       eslint: 8.50.0
       eslint-module-utils: 2.8.0_3mddcwg22vuwxq34sdgo4nhj2a
-      eslint-plugin-import: 2.28.1_7juwwq4lilwvkas6knc4dqepxq
+      eslint-plugin-import: 2.28.1_eslint@8.50.0
       fast-glob: 3.3.1
       get-tsconfig: 4.7.2
       is-core-module: 2.13.0
@@ -2328,7 +2311,35 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-import/2.28.1_7juwwq4lilwvkas6knc4dqepxq:
+  /eslint-module-utils/2.8.0_dobmu2jocazc7pf6ctdcmtyb2y:
+    resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: '*'
+      eslint-import-resolver-node: '*'
+      eslint-import-resolver-typescript: '*'
+      eslint-import-resolver-webpack: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+      eslint:
+        optional: true
+      eslint-import-resolver-node:
+        optional: true
+      eslint-import-resolver-typescript:
+        optional: true
+      eslint-import-resolver-webpack:
+        optional: true
+    dependencies:
+      debug: 3.2.7
+      eslint: 8.50.0
+      eslint-import-resolver-node: 0.3.9
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /eslint-plugin-import/2.28.1_eslint@8.50.0:
     resolution: {integrity: sha512-9I9hFlITvOV55alzoKBI+K9q74kv0iKMeY6av5+umsNwayt59fz692daGyjR+oStBQgx6nwR9rXldDev3Clw+A==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -2338,7 +2349,6 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 6.7.3_jk7qbkaijtltyu4ajmze3dfiwa
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
       array.prototype.flat: 1.3.2
@@ -2347,7 +2357,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.50.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.0_3mddcwg22vuwxq34sdgo4nhj2a
+      eslint-module-utils: 2.8.0_dobmu2jocazc7pf6ctdcmtyb2y
       has: 1.0.3
       is-core-module: 2.13.0
       is-glob: 4.0.3
@@ -3201,7 +3211,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next/13.5.3_biqbaboplfbrettd7655fr4n2y:
+  /next/13.5.3_pamseawcqpaoyqfggclsvtomea:
     resolution: {integrity: sha512-4Nt4HRLYDW/yRpJ/QR2t1v63UOMS55A38dnWv3UDOWGezuY0ZyFO1ABNbD7mulVzs9qVhgy2+ppjdsANpKP1mg==}
     engines: {node: '>=16.14.0'}
     hasBin: true
@@ -3223,7 +3233,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      styled-jsx: 5.1.1_react@18.2.0
+      styled-jsx: 5.1.1_4l3bwhhheaj4s4rmou2pfm77ai
       watchpack: 2.4.0
       zod: 3.21.4
     optionalDependencies:
@@ -3512,6 +3522,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /readdirp/3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
@@ -3778,7 +3789,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /styled-jsx/5.1.1_react@18.2.0:
+  /styled-jsx/5.1.1_4l3bwhhheaj4s4rmou2pfm77ai:
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -3791,6 +3802,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
+      '@babel/core': 7.23.0
       client-only: 0.0.1
       react: 18.2.0
     dev: false
