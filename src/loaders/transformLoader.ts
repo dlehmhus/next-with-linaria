@@ -12,7 +12,7 @@ import type {
   Preprocessor,
   Result,
 } from '@linaria/babel-preset';
-import { transform } from '@linaria/babel-preset';
+import { transform, TransformCacheCollection } from '@linaria/babel-preset';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
@@ -33,10 +33,12 @@ export type LinariaLoaderOptions = {
 
 type LoaderType = RawLoaderDefinitionFunction<LinariaLoaderOptions>;
 
+const cache = new TransformCacheCollection();
+
 function convertSourceMap(
   value: Parameters<LoaderType>[1],
   filename: string,
-): Parameters<typeof transform>[1]['inputSourceMap'] {
+): Parameters<typeof transform>[0]['options']['inputSourceMap'] {
   if (typeof value === 'string' || !value) {
     return undefined;
   }
@@ -81,16 +83,18 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     });
   };
 
-  transform(
-    content.toString(),
-    {
+  const transformServices = {
+    options: {
       filename: this.resourcePath,
       inputSourceMap: convertSourceMap(inputSourceMap, this.resourcePath),
-      pluginOptions: rest,
+      root: process.cwd(),
       preprocessor,
+      pluginOptions: rest,
     },
-    asyncResolve,
-  ).then(
+    cache,
+  };
+
+  transform(transformServices, content.toString(), asyncResolve).then(
     async (result: Result) => {
       if (result.cssText) {
         let { cssText } = result;
