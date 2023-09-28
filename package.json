@@ -1,6 +1,6 @@
 {
   "name": "next-with-linaria",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Linaria support for Next.js 13 app directory feature",
   "main": "lib/webpackConfig.js",
   "scripts": {
