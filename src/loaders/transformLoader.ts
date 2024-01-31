@@ -7,12 +7,8 @@
  * returns transformed code without template literals and attaches generated source maps
  */
 
-import type {
-  PluginOptions,
-  Preprocessor,
-  Result,
-} from '@linaria/babel-preset';
-import { transform, TransformCacheCollection } from '@linaria/babel-preset';
+import type { PluginOptions, Preprocessor, Result } from '@wyw-in-js/transform';
+import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
