@@ -102,7 +102,7 @@ export default function withLinaria({
         sourceMap: process.env.NODE_ENV !== 'production',
         displayName: process.env.NODE_ENV !== 'production',
         babelOptions: {
-          presets: ['next/babel', '@linaria'],
+          presets: ['next/babel', '@wyw-in-js'],
         },
         ...linaria,
         moduleStore,

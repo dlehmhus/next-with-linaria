@@ -13,9 +13,10 @@
   },
   "packageManager": "pnpm@7.27.1",
   "devDependencies": {
-    "@linaria/babel-preset": "5.0.3",
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
+    "@wyw-in-js/babel-preset": "0.3.0",
+    "@wyw-in-js/transform": "0.3.0",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-prettier": "5.0.0",
@@ -31,8 +32,9 @@
     "webpack": "5.88.2"
   },
   "peerDependencies": {
-    "@linaria/babel-preset": "5.x",
-    "@babel/runtime": "7.x"
+    "@babel/runtime": "7.x",
+    "@wyw-in-js/babel-preset": "0.x",
+    "@wyw-in-js/transform": "0.x"
   },
   "dependencies": {
     "file-system-cache": "2.4.4"

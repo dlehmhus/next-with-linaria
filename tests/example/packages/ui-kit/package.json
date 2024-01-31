@@ -8,8 +8,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@linaria/core": "^5.0.2",
-    "@linaria/react": "^5.0.2"
+    "@linaria/core": "6.0.0",
+    "@linaria/react": "6.0.0"
   },
   "devDependencies": {
     "react": "18.2.0"
