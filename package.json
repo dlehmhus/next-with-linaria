@@ -11,7 +11,7 @@
     "test": "pnpm test --filter ./tests/example",
     "prepublish": "pnpm run clean && pnpm run build"
   },
-  "packageManager": "pnpm@7.27.1",
+  "packageManager": "pnpm@8.15.0",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
