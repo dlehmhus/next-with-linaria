@@ -8,10 +8,6 @@ The new Next.js 13 app directory feature doesn't work with the [@linaria/webpack
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/next-with-linaria?file=app%2Fpage.tsx)
 
-## Disclaimer
-
-⚠️ This package is still in development and not battle tested yet! Don't use it in production. ⚠️
-
 ## Installation
 
 <details open><summary>npm</summary>
@@ -97,7 +93,3 @@ export default function RootLayout({
 ```
 
 This convention is needed because the loader needs to know which files contain global styles and which don't.
-
-## Good to know
-
-Because webpack 5 caches modules, the virtual CSS Modules need to be cached as well (so at that point the are not really virtual anymore, are they? Anyway...). They are placed in the same directory as where webpack puts its cache files. If the `next-with-linaria` cache is not in sync with the webpack cache anymore, it will cause errors due to missing CSS Modules. If you encounter such an error, you can delete the `.next/cache/webpack` folder and restart the dev server.
