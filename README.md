@@ -13,21 +13,21 @@ Since the Next.js app directory feature doesn't work with the [@linaria/webpack5
 <details open><summary>npm</summary>
 
 ```sh
-    npm install next-with-linaria @linaria/babel-preset @linaria/core @linaria/react
+    npm install next-with-linaria @wyw-in-js/babel-preset @linaria/core @linaria/react
 ```
 
 </details>
 <details><summary>pnpm</summary>
 
 ```sh
-    pnpm install next-with-linaria @linaria/babel-preset @linaria/core @linaria/react
+    pnpm install next-with-linaria @wyw-in-js/babel-preset @linaria/core @linaria/react
 ```
 
 </details>
 <details><summary>yarn</summary>
 
 ```sh
-    yarn add next-with-linaria @linaria/babel-preset @linaria/core @linaria/react
+    yarn add next-with-linaria @wyw-in-js/babel-preset @linaria/core @linaria/react
 ```
 
 </details>
