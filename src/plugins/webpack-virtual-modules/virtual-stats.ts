@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Used to cache a stats object for the virtual file.
  * Extracted from the `mock-fs` package.
