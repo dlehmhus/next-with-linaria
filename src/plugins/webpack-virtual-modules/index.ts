@@ -1,4 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-nocheck
 
 // Thanks https://github.com/sysgears/webpack-virtual-modules/blob/ea53626016db74de66b14401b7377cbc3fc31059/src/index.ts
