@@ -44,7 +44,7 @@ export function isCssModule(
 }
 
 export function isCssLoader(rule: Webpack.RuleSetRule): boolean {
-  return typeof rule.loader === 'string' && rule.loader.includes('css-loader');
+  return typeof rule?.loader === 'string' && rule.loader.includes('css-loader');
 }
 
 export function isFSCache(
