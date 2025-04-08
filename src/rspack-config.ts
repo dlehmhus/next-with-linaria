@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type * as Rspack from '@rspack/core';
 import type { NextConfig } from 'next';
 import type * as NextServer from 'next/dist/server/config-shared';
 import path from 'path';
@@ -9,15 +8,15 @@ import {
   LinariaLoaderOptions,
   regexLinariaCSS,
   regexLinariaGlobalCSS,
-} from './loaders/transformLoader';
-import RspackModuleStore from './rspack-module-store';
+} from './loaders/tranform-loader';
+import ModuleStore from './module-store';
 import { isCssLoader, isCssModule } from './utils';
-import VirtualModuleStore from './VirtualModuleStore';
 
 // Thanks https://github.com/Mistereo/next-linaria/blob/de4fd15269bd059e35797bb7250ce84cc8c5067c/index.js#L3
 // for the inspiration
 function traverseLoaders(rules: Webpack.RuleSetRule[]) {
   for (const rule of rules) {
+    if (!rule) continue;
     if (isCssLoader(rule)) {
       if (isCssModule(rule)) {
         const nextGetLocalIdent = rule.options.modules.getLocalIdent;
@@ -58,7 +57,7 @@ function traverseLoaders(rules: Webpack.RuleSetRule[]) {
   }
 }
 
-let moduleStore: RspackModuleStore;
+let moduleStore: ModuleStore;
 
 export type LinariaConfig = NextConfig & {
   linaria?: Omit<LinariaLoaderOptions, 'moduleStore'>;
@@ -76,17 +75,17 @@ export default function withLinaria({
   ) => {
     if (config.module?.rules && config.plugins) {
       if (isRspack) {
-        (config as Rspack.Configuration).experiments = {
-          ...((config as Rspack.Configuration).experiments || {}),
-          parallelLoader: true,
-        };
+        // (config as Rspack.Configuration).experiments = {
+        //   ...((config as Rspack.Configuration).experiments || {}),
+        //   parallelLoader: true,
+        // };
       }
 
       traverseLoaders(config.module.rules as Webpack.RuleSetRule[]);
 
       // Add our store for virtual linaria css modules
       if (!moduleStore) {
-        moduleStore = new RspackModuleStore(config);
+        moduleStore = new ModuleStore(config);
       }
       config.plugins.push(moduleStore.createStore(config) as any);
 
@@ -97,10 +96,7 @@ export default function withLinaria({
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(
-              __dirname,
-              './loaders/output-css-loader-rspack',
-            ),
+            loader: path.resolve(__dirname, './loaders/output-css-loader'),
             ...(isRspack ? { parallel: true } : {}),
             options: {
               moduleStore,
@@ -117,16 +113,16 @@ export default function withLinaria({
           presets: ['next/babel', '@wyw-in-js'],
         },
         ...linaria,
-        moduleStore: moduleStore as unknown as VirtualModuleStore,
+        moduleStore,
       };
       config.module.rules.push({
         test: /\.(tsx|ts|js|mjs|jsx)$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(__dirname, './loaders/tranform-loader-rspack'),
+            loader: path.resolve(__dirname, './loaders/tranform-loader'),
             options: linariaLoaderOptions,
-            ...(isRspack ? { parallel: true } : {}),
+            // ...(isRspack ? { parallel: true } : {}),
           },
         ],
       });

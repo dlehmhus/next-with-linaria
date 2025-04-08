@@ -12,7 +12,7 @@ import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from '../VirtualModuleStore';
+import ModuleStore from '../module-store';
 
 export const LINARIA_MODULE_EXTENSION = '.linaria.module';
 export const LINARIA_GLOBAL_EXTENSION = '.linaria.global';
@@ -23,7 +23,7 @@ export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
 export type LinariaLoaderOptions = {
-  moduleStore: VirtualModuleStore;
+  moduleStore: ModuleStore;
   preprocessor?: Preprocessor;
   sourceMap?: boolean;
 } & Partial<PluginOptions>;

@@ -4,7 +4,7 @@
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
 import VirtualModuleStore from '../VirtualModuleStore';
-import { LINARIA_CSS_ALIAS } from './tranform-loader-rspack';
+import { LINARIA_CSS_ALIAS } from './tranform-loader';
 
 type OutputLoaderOptions = {
   moduleStore: VirtualModuleStore;

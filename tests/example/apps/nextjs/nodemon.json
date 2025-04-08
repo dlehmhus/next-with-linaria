@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/nodemon.json",
-  "watch": ["next.config.js", "../../../../lib/"],
-  "exec": "pnpm exec next dev",
+  "watch": ["next.config.ts", "../../../../lib/"],
+  "exec": "pnpm exec next dev --port 3001",
   "ignore": [".next/"]
 }

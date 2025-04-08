@@ -5,7 +5,7 @@ import type * as Webpack from 'webpack';
 import RspackVirtualModulePlugin from './plugins/rspack-virtual-modules';
 import { isFSCache } from './utils';
 
-export default class RspackVirtualModuleStore {
+export default class ModuleStore {
   private vmInstances: Map<string, RspackVirtualModulePlugin> = new Map();
 
   private dependencyCache: FileSystemCache | undefined;
