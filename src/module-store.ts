@@ -28,7 +28,7 @@ export default class ModuleStore {
 
   public addModuleDependencies(modulePath: string, deps: string[]) {
     if (this.dependencyCache) {
-      this.dependencyCache.setSync(modulePath, deps);
+      this.dependencyCache.set(modulePath, deps);
     }
   }
 
