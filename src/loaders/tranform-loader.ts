@@ -24,7 +24,7 @@ export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
 // Pattern to quickly check if file potentially contains Linaria syntax
-const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`|css\s*\(|cx\s*\()/;
+const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`)/;
 
 export type LinariaLoaderOptions = {
   /**
@@ -163,13 +163,11 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
             isGlobalStyle ? LINARIA_GLOBAL_EXTENSION : LINARIA_MODULE_EXTENSION
           }.css`;
 
-          await Promise.all([
-            moduleStore.addModule(cssModuleName, cssText),
-            moduleStore.addModuleDependencies(
-              cssModuleName,
-              this.getDependencies(),
-            ),
-          ]);
+          moduleStore.addModule(cssModuleName, cssText);
+          moduleStore.addModuleDependencies(
+            cssModuleName,
+            this.getDependencies(),
+          );
 
           this.callback(
             null,

@@ -97,7 +97,8 @@ export default function withLinaria({
       if (!moduleStore) {
         moduleStore = new ModuleStore(config);
       }
-      config.plugins.push(moduleStore.createStore(config) as any);
+
+      config.plugins.push(moduleStore.virtualModules);
 
       // Add css output loader with access to the module store
       // in order to set the correct dependencies
