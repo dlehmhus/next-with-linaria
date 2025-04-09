@@ -142,9 +142,10 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
             this.resourcePath,
           );
 
-          const sanitizedPath = pathFromProjectRoot
-            .replace(/\.(tsx|ts|jsx|js)$/, '') // Remove the file extension
-            .replace(/[^a-zA-Z0-9]/g, '_'); // Replace non-alphanumeric chars with underscores
+          const sanitizedPath = pathFromProjectRoot.replace(
+            /[^a-zA-Z0-9]/g,
+            '_',
+          );
 
           const filename = path.basename(
             this.resourcePath,
