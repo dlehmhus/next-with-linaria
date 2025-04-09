@@ -59,7 +59,17 @@ function traverseLoaders(rules: Webpack.RuleSetRule[]) {
 let moduleStore: VirtualModuleStore;
 
 export type LinariaConfig = NextConfig & {
-  linaria?: Omit<LinariaLoaderOptions, 'moduleStore'>;
+  /**
+   * Linaria webpack loader options
+   */
+  linaria?: Omit<LinariaLoaderOptions, 'moduleStore'> & {
+    /**
+     * Enables a quick syntax check to skip transform for files that don't contain Linaria code.
+     * This can significantly improve performance for large projects.
+     * @default false
+     */
+    fastCheck?: boolean;
+  };
 };
 
 export default function withLinaria({

@@ -13,6 +13,7 @@ import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
 import ModuleStore from '../module-store';
+import { logger } from '../utils/logger';
 
 export const LINARIA_MODULE_EXTENSION = '.linaria.module';
 export const LINARIA_GLOBAL_EXTENSION = '.linaria.global';
@@ -22,7 +23,16 @@ export const regexLinariaModuleCSS = /\.linaria\.module\.css$/;
 export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
+// Pattern to quickly check if file potentially contains Linaria syntax
+const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`|css\s*\(|cx\s*\()/;
+
 export type LinariaLoaderOptions = {
+  /**
+   * Enables a quick syntax check to skip transform for files that don't contain Linaria code.
+   * This can significantly improve performance for large projects.
+   * @default false
+   */
+  fastCheck?: boolean;
   moduleStore: ModuleStore;
   preprocessor?: Preprocessor;
   sourceMap?: boolean;
@@ -31,6 +41,9 @@ export type LinariaLoaderOptions = {
 type LoaderType = RawLoaderDefinitionFunction<LinariaLoaderOptions>;
 
 const cache = new TransformCacheCollection();
+
+// Track if we've shown the fastCheck message already
+let fastCheckMessageShown = false;
 
 function convertSourceMap(
   value: Parameters<LoaderType>[1],
@@ -58,8 +71,23 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     sourceMap = undefined,
     preprocessor = undefined,
     moduleStore,
+    fastCheck = false,
     ...rest
   } = this.getOptions() || {};
+
+  // Show the fastCheck message once per build
+  if (fastCheck && !fastCheckMessageShown) {
+    logger.info('Linaria fastCheck optimization enabled');
+    fastCheckMessageShown = true;
+  }
+
+  const contentStr = content.toString();
+
+  // Skip transform for files without Linaria syntax if fastCheck is enabled
+  if (fastCheck && !LINARIA_SYNTAX_PATTERN.test(contentStr)) {
+    this.callback(null, contentStr, inputSourceMap);
+    return;
+  }
 
   const asyncResolve = (token: string, importer: string): Promise<string> => {
     const context = path.isAbsolute(importer)
@@ -91,7 +119,7 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     cache,
   };
 
-  transform(transformServices, content.toString(), asyncResolve).then(
+  transform(transformServices, contentStr, asyncResolve).then(
     async (result: Result) => {
       if (result.cssText) {
         let { cssText } = result;

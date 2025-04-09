@@ -9,6 +9,9 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  linaria: {
+    fastCheck: true,
+  },
 };
 
 const enableRspack = true;

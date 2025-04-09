@@ -41,11 +41,35 @@ const withLinaria = require('next-with-linaria');
 /** @type {import('next-with-linaria').LinariaConfig} */
 const config = {
   // ...your next.js config
+  linaria: {
+    // Linaria options here
+  },
 };
 module.exports = withLinaria(config);
 ```
 
 Now you can use linaria in all the places where Next.js also allows you to use [CSS Modules](https://beta.nextjs.org/docs/styling/css-modules). That currently means in every file in in the `app` directory. And the `pages` directory of course as well.
+
+## Performance Optimization
+
+For large projects, you can enable the `fastCheck` option to improve build performance:
+
+```js
+// next.config.js
+const withLinaria = require('next-with-linaria');
+
+/** @type {import('next-with-linaria').LinariaConfig} */
+const config = {
+  // ...your next.js config
+  linaria: {
+    // Enable performance optimization
+    fastCheck: true,
+  },
+};
+module.exports = withLinaria(config);
+```
+
+This optimization skips the Linaria transform process for files that don't contain Linaria syntax, which can significantly reduce build times for large projects.
 
 ## Global Styles Restrictions
 
