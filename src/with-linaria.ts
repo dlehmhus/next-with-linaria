@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextConfig } from 'next';
 import type * as NextServer from 'next/dist/server/config-shared';
 import path from 'path';
@@ -7,15 +8,15 @@ import {
   LinariaLoaderOptions,
   regexLinariaCSS,
   regexLinariaGlobalCSS,
-} from './loaders/transformLoader';
-import { ErrorPlugin } from './plugins/errorPlugin';
+} from './loaders/tranform-loader';
+import ModuleStore from './module-store';
 import { isCssLoader, isCssModule } from './utils';
-import VirtualModuleStore from './VirtualModuleStore';
 
 // Thanks https://github.com/Mistereo/next-linaria/blob/de4fd15269bd059e35797bb7250ce84cc8c5067c/index.js#L3
 // for the inspiration
 function traverseLoaders(rules: Webpack.RuleSetRule[]) {
   for (const rule of rules) {
+    if (!rule) continue;
     if (isCssLoader(rule)) {
       if (isCssModule(rule)) {
         const nextGetLocalIdent = rule.options.modules.getLocalIdent;
@@ -56,31 +57,47 @@ function traverseLoaders(rules: Webpack.RuleSetRule[]) {
   }
 }
 
-let moduleStore: VirtualModuleStore;
+let moduleStore: ModuleStore;
 
 export type LinariaConfig = NextConfig & {
-  linaria?: Omit<LinariaLoaderOptions, 'moduleStore'>;
+  /**
+   * Linaria webpack loader options
+   */
+  linaria?: Omit<LinariaLoaderOptions, 'moduleStore'> & {
+    /**
+     * Enables a quick syntax check to skip transform for files that don't contain Linaria code.
+     * This can significantly improve performance for large projects.
+     * @default false
+     */
+    fastCheck?: boolean;
+  };
 };
 
 export default function withLinaria({
   linaria = {},
   ...nextConfig
 }: LinariaConfig) {
+  const isRspack = process.env.NEXT_RSPACK;
+
   const webpack = (
     config: Webpack.Configuration,
     options: NextServer.WebpackConfigContext,
   ) => {
     if (config.module?.rules && config.plugins) {
+      if (isRspack) {
+        // (config as Rspack.Configuration).experiments = {
+        //   ...((config as Rspack.Configuration).experiments || {}),
+        //   parallelLoader: true,
+        // };
+      }
+
       traverseLoaders(config.module.rules as Webpack.RuleSetRule[]);
 
       // Add our store for virtual linaria css modules
       if (!moduleStore) {
-        moduleStore = new VirtualModuleStore(config);
+        moduleStore = new ModuleStore(config);
       }
-      config.plugins.push(moduleStore.createStore(config.name));
-
-      // Show message when linaria cache is out of sync with webpack
-      config.plugins.push(new ErrorPlugin());
+      config.plugins.push(moduleStore.createStore(config) as any);
 
       // Add css output loader with access to the module store
       // in order to set the correct dependencies
@@ -89,7 +106,8 @@ export default function withLinaria({
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(__dirname, './loaders/outputCssLoader'),
+            loader: path.resolve(__dirname, './loaders/output-css-loader'),
+            ...(isRspack ? { parallel: true } : {}),
             options: {
               moduleStore,
             },
@@ -112,8 +130,9 @@ export default function withLinaria({
         exclude: /node_modules/,
         use: [
           {
-            loader: path.resolve(__dirname, './loaders/transformLoader'),
+            loader: path.resolve(__dirname, './loaders/tranform-loader'),
             options: linariaLoaderOptions,
+            // ...(isRspack ? { parallel: true } : {}),
           },
         ],
       });

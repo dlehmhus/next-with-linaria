@@ -3,10 +3,11 @@
 
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from '../VirtualModuleStore';
+import ModuleStore from '../module-store';
+import { LINARIA_CSS_ALIAS } from './tranform-loader';
 
 type OutputLoaderOptions = {
-  moduleStore: VirtualModuleStore;
+  moduleStore: ModuleStore;
 };
 
 type LoaderType = RawLoaderDefinitionFunction<OutputLoaderOptions>;
@@ -15,8 +16,11 @@ const cssOutputLoader: LoaderType = function (content, inputSourceMap) {
   this.async();
 
   const { moduleStore } = this.getOptions();
+
+  const aliasFileName = this.resourcePath.split(LINARIA_CSS_ALIAS).pop();
+
   moduleStore
-    .getModuleDependencies(this.resourcePath)
+    .getModuleDependencies(LINARIA_CSS_ALIAS + aliasFileName)
     .then((deps) => {
       if (deps) {
         deps.forEach((dep) => {

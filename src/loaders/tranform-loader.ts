@@ -12,17 +12,28 @@ import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from '../VirtualModuleStore';
+import ModuleStore from '../module-store';
+import { logger } from '../utils/logger';
 
 export const LINARIA_MODULE_EXTENSION = '.linaria.module';
 export const LINARIA_GLOBAL_EXTENSION = '.linaria.global';
+export const LINARIA_CSS_ALIAS = '@linaria-css';
 
 export const regexLinariaModuleCSS = /\.linaria\.module\.css$/;
 export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
+// Pattern to quickly check if file potentially contains Linaria syntax
+const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`|css\s*\(|cx\s*\()/;
+
 export type LinariaLoaderOptions = {
-  moduleStore: VirtualModuleStore;
+  /**
+   * Enables a quick syntax check to skip transform for files that don't contain Linaria code.
+   * This can significantly improve performance for large projects.
+   * @default false
+   */
+  fastCheck?: boolean;
+  moduleStore: ModuleStore;
   preprocessor?: Preprocessor;
   sourceMap?: boolean;
 } & Partial<PluginOptions>;
@@ -30,6 +41,9 @@ export type LinariaLoaderOptions = {
 type LoaderType = RawLoaderDefinitionFunction<LinariaLoaderOptions>;
 
 const cache = new TransformCacheCollection();
+
+// Track if we've shown the fastCheck message already
+let fastCheckMessageShown = false;
 
 function convertSourceMap(
   value: Parameters<LoaderType>[1],
@@ -57,8 +71,28 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     sourceMap = undefined,
     preprocessor = undefined,
     moduleStore,
+    fastCheck = true,
     ...rest
   } = this.getOptions() || {};
+
+  // Show the fastCheck message once per build
+  if (fastCheck && !fastCheckMessageShown) {
+    logger.info(
+      'Linaria fastCheck optimization enabled - skipping transform for files without Linaria syntax',
+    );
+    logger.info(
+      'If you experience styling issues, try disabling fastCheck in your webpack config',
+    );
+    fastCheckMessageShown = true;
+  }
+
+  const contentStr = content.toString();
+
+  // Skip transform for files without Linaria syntax if fastCheck is enabled
+  if (fastCheck && !LINARIA_SYNTAX_PATTERN.test(contentStr)) {
+    this.callback(null, contentStr, inputSourceMap);
+    return;
+  }
 
   const asyncResolve = (token: string, importer: string): Promise<string> => {
     const context = path.isAbsolute(importer)
@@ -90,7 +124,7 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     cache,
   };
 
-  transform(transformServices, content.toString(), asyncResolve).then(
+  transform(transformServices, contentStr, asyncResolve).then(
     async (result: Result) => {
       if (result.cssText) {
         let { cssText } = result;
@@ -108,30 +142,38 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
         );
 
         try {
+          const pathFromProjectRoot = path.relative(
+            process.cwd(),
+            this.resourcePath,
+          );
+
+          const sanitizedPath = pathFromProjectRoot.replace(
+            /[^a-zA-Z0-9]/g,
+            '_',
+          );
+
           const filename = path.basename(
             this.resourcePath,
             path.extname(this.resourcePath),
           );
-          const fileDir = path.dirname(this.resourcePath);
+
           const isGlobalStyle = filename.endsWith(LINARIA_GLOBAL_EXTENSION);
 
-          const cssModuleName = `${filename}${
-            isGlobalStyle ? '' : LINARIA_MODULE_EXTENSION
+          const cssModuleName = `${LINARIA_CSS_ALIAS}/${sanitizedPath}${
+            isGlobalStyle ? LINARIA_GLOBAL_EXTENSION : LINARIA_MODULE_EXTENSION
           }.css`;
 
-          const fullPathToModule = path.join(fileDir, cssModuleName);
-
           await Promise.all([
-            moduleStore.addModule(fullPathToModule, cssText),
+            moduleStore.addModule(cssModuleName, cssText),
             moduleStore.addModuleDependencies(
-              fullPathToModule,
+              cssModuleName,
               this.getDependencies(),
             ),
           ]);
 
           this.callback(
             null,
-            `${result.code}\n\nrequire("./${cssModuleName}");`,
+            `${result.code}\n\nrequire("${cssModuleName}");`,
             result.sourceMap ?? undefined,
           );
         } catch (err) {
