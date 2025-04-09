@@ -2,7 +2,7 @@
 
 ## What is this?
 
-Since the Next.js app directory feature doesn't work with the [@linaria/webpack5-loader](https://github.com/callstack/linaria/tree/master/packages/webpack5-loader) anymore, therefore the [next-linaria](https://github.com/Mistereo/next-linaria) package sadly also doesn't work. This package solves that issue with a custom linaria webpack loader and [Webpack Virtual Modules](https://github.com/sysgears/webpack-virtual-modules).
+Since the Next.js app directory feature doesn't work with the [@linaria/webpack5-loader](https://github.com/callstack/linaria/tree/master/packages/webpack5-loader) anymore, therefore the [next-linaria](https://github.com/Mistereo/next-linaria) package sadly also doesn't work. This package solves that issue with a custom linaria webpack loader.
 
 ## Try it before you buy it
 
@@ -34,6 +34,8 @@ Since the Next.js app directory feature doesn't work with the [@linaria/webpack5
 
 ## Usage
 
+### Basic Setup
+
 ```js
 // next.config.js
 const withLinaria = require('next-with-linaria');
@@ -41,11 +43,55 @@ const withLinaria = require('next-with-linaria');
 /** @type {import('next-with-linaria').LinariaConfig} */
 const config = {
   // ...your next.js config
+  linaria: {
+    // Linaria options here
+  },
 };
 module.exports = withLinaria(config);
 ```
 
-Now you can use linaria in all the places where Next.js also allows you to use [CSS Modules](https://beta.nextjs.org/docs/styling/css-modules). That currently means in every file in in the `app` directory. And the `pages` directory of course as well.
+### Rspack Support
+
+To use Rspack instead of Webpack, you can combine this package with `next-rspack`:
+
+```js
+// next.config.js
+const withRspack = require('next-rspack');
+const withLinaria = require('next-with-linaria');
+
+/** @type {import('next-with-linaria').LinariaConfig} */
+const config = {
+  // ...your next.js config
+  linaria: {
+    // Linaria options here
+  },
+};
+
+module.exports = withRspack(withLinaria(config));
+```
+
+Now you can use linaria in all the places where Next.js also allows you to use [CSS Modules](https://beta.nextjs.org/docs/styling/css-modules). That currently means in every file in the `app` directory and the `pages` directory.
+
+## Performance Optimization
+
+The `fastCheck` option is enabled by default to improve build performance. This optimization skips the Linaria transform process for files that don't contain Linaria syntax, which can reduce build times for large projects.
+
+If you experience any issues with the optimization, you can disable it:
+
+```js
+// next.config.js
+const withLinaria = require('next-with-linaria');
+
+/** @type {import('next-with-linaria').LinariaConfig} */
+const config = {
+  // ...your next.js config
+  linaria: {
+    // Disable performance optimization if needed
+    fastCheck: false,
+  },
+};
+module.exports = withLinaria(config);
+```
 
 ## Global Styles Restrictions
 
