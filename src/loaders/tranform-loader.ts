@@ -24,7 +24,7 @@ export const regexLinariaGlobalCSS = /\.linaria\.global\.css$/;
 export const regexLinariaCSS = /\.linaria\.(module|global)\.css$/;
 
 // Pattern to quickly check if file potentially contains Linaria syntax
-const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`|css\s*\(|cx\s*\()/;
+const LINARIA_SYNTAX_PATTERN = /(styled[.(]|css`)/;
 
 export type LinariaLoaderOptions = {
   /**
