@@ -71,13 +71,18 @@ const transformLoader: LoaderType = function (content, inputSourceMap) {
     sourceMap = undefined,
     preprocessor = undefined,
     moduleStore,
-    fastCheck = false,
+    fastCheck = true,
     ...rest
   } = this.getOptions() || {};
 
   // Show the fastCheck message once per build
   if (fastCheck && !fastCheckMessageShown) {
-    logger.info('Linaria fastCheck optimization enabled');
+    logger.info(
+      'Linaria fastCheck optimization enabled - skipping transform for files without Linaria syntax',
+    );
+    logger.info(
+      'If you experience styling issues, try disabling fastCheck in your webpack config',
+    );
     fastCheckMessageShown = true;
   }
 

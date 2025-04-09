@@ -33,7 +33,7 @@ export class Logger {
   private minLevel: LogLevel;
 
   constructor(options: LoggerOptions = {}) {
-    this.prefix = options.prefix || 'next-linaria';
+    this.prefix = options.prefix || 'next-with-linaria';
     this.enableColors = options.enableColors !== false;
     this.minLevel = options.minLevel || 'info';
   }

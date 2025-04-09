@@ -3,11 +3,11 @@
 
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
-import VirtualModuleStore from '../VirtualModuleStore';
+import ModuleStore from '../module-store';
 import { LINARIA_CSS_ALIAS } from './tranform-loader';
 
 type OutputLoaderOptions = {
-  moduleStore: VirtualModuleStore;
+  moduleStore: ModuleStore;
 };
 
 type LoaderType = RawLoaderDefinitionFunction<OutputLoaderOptions>;

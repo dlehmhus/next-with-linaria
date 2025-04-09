@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "cross-env TARGET=prod playwright test && cross-env TARGET=dev playwright test"
+    "test": "npm run test:rspack && npm run test:webpack",
+    "test:rspack": "cross-env USE_RSPACK=true TARGET=prod playwright test && cross-env USE_RSPACK=true TARGET=dev playwright test",
+    "test:webpack": "cross-env USE_RSPACK=false TARGET=prod playwright test && cross-env USE_RSPACK=false TARGET=dev playwright test"
   },
   "dependencies": {
     "@linaria/core": "6.3.0",

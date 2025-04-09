@@ -1,7 +1,6 @@
 import withRspack from 'next-rspack';
 
-import withLinariaWebpack from '../../../../';
-import withLinariaRspack from '../../../../lib/rspack-config';
+import withLinaria from '../../../../';
 
 /** @type {import('../../../../').LinariaConfig} */
 const config = {
@@ -14,14 +13,15 @@ const config = {
   },
 };
 
-const enableRspack = true;
+// Use environment variable to toggle between webpack and rspack
+const enableRspack = process.env.USE_RSPACK !== 'false';
 
 let nextConfig;
 
 if (enableRspack) {
-  nextConfig = withRspack(withLinariaRspack(config));
+  nextConfig = withRspack(withLinaria(config));
 } else {
-  nextConfig = withLinariaWebpack(config);
+  nextConfig = withLinaria(config);
 }
 
 export default nextConfig;

@@ -1,29 +1,26 @@
-import { dirname, extname, join } from 'node:path';
+// This based on: https://github.com/rspack-contrib/rspack-plugin-virtual-module/blob/cb277d529253de047284760be1d1cd439dc20676/src/index.ts
+import path, { dirname, extname, join } from 'node:path';
 
-import type { Compiler, RspackPluginInstance } from '@rspack/core';
 import fs from 'fs-extra';
 import type * as Webpack from 'webpack';
 
-export class RspackVirtualModulePlugin implements RspackPluginInstance {
-  #staticModules: Record<string, string>;
+import { getCacheBasePath } from '../utils/cache';
 
+export class VirtualModulePlugin implements Webpack.WebpackPluginInstance {
+  #staticModules: Record<string, string>;
   #modulesDir: string;
 
-  constructor(config: Webpack.Configuration) {
-    this.#staticModules = {};
-
-    const moduleDir = join(
-      process.cwd(),
-      '.next',
-      'cache',
-      'linaria',
-      config.mode ?? '',
-    );
-    fs.ensureDirSync(moduleDir);
-    this.#modulesDir = moduleDir;
+  constructor(
+    config: Webpack.Configuration,
+    staticModules: Record<string, string> = {},
+  ) {
+    this.#staticModules = staticModules;
+    const modulesDir = path.join(getCacheBasePath(config), 'css');
+    fs.ensureDirSync(modulesDir);
+    this.#modulesDir = modulesDir;
   }
 
-  apply(compiler: Compiler) {
+  apply(compiler: Webpack.Compiler) {
     // Write the modules to the disk
     for (const [path, content] of Object.entries(this.#staticModules)) {
       this.writeModule(path, content);
@@ -60,4 +57,4 @@ export class RspackVirtualModulePlugin implements RspackPluginInstance {
   }
 }
 
-export default RspackVirtualModulePlugin;
+export default VirtualModulePlugin;

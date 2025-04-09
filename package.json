@@ -1,8 +1,8 @@
 {
   "name": "next-with-linaria",
   "version": "0.7.0",
-  "description": "Linaria support for Next.js 13 app directory feature",
-  "main": "lib/webpackConfig.js",
+  "description": "Linaria support for Next.js App Router",
+  "main": "lib/with-linaria.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -70,6 +70,8 @@
     "linaria",
     "next",
     "next.js",
-    "css"
+    "css",
+    "rspack",
+    "webpack"
   ]
 }
