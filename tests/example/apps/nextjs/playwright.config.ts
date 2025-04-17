@@ -30,6 +30,7 @@ const config: PlaywrightTestConfig = {
     reuseExistingServer: !isCI,
   },
   use: {
+    baseURL: `http://localhost:${port}`,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },

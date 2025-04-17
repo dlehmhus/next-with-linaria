@@ -2,9 +2,9 @@
 
 ## What is this?
 
-Since the Next.js app directory feature doesn't work with the [@linaria/webpack5-loader](https://github.com/callstack/linaria/tree/master/packages/webpack5-loader) anymore, therefore the [next-linaria](https://github.com/Mistereo/next-linaria) package sadly also doesn't work. This package solves that issue with a custom linaria webpack loader.
+This package provides seamless integration between Next.js and Linaria, a zero-runtime CSS-in-JS solution. It allows you to use Linaria's powerful styling capabilities directly in your Next.js applications, with full support for both the App Router and Pages Router.
 
-## Try it before you buy it
+## Try it
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/next-with-linaria?file=app%2Fpage.tsx)
 
@@ -34,40 +34,41 @@ Since the Next.js app directory feature doesn't work with the [@linaria/webpack5
 
 ## Usage
 
-### Basic Setup
+### Webpack / Turbopack\*
 
-```js
-// next.config.js
-const withLinaria = require('next-with-linaria');
+```ts
+// next.config.ts
+import withLinaria, { LinariaConfig } from 'next-with-linaria';
 
-/** @type {import('next-with-linaria').LinariaConfig} */
-const config = {
+const config: LinariaConfig = {
   // ...your next.js config
   linaria: {
     // Linaria options here
   },
 };
-module.exports = withLinaria(config);
+
+export default withLinaria(config);
 ```
 
-### Rspack Support
+\*The Turbopack loader currently only works for client components due to a [bug](https://github.com/vercel/next.js/issues/78096) in Turbopack.
+
+### Rspack
 
 To use Rspack instead of Webpack, you can combine this package with `next-rspack`:
 
-```js
-// next.config.js
-const withRspack = require('next-rspack');
-const withLinaria = require('next-with-linaria');
+```ts
+// next.config.ts
+import withRspack from 'next-rspack';
+import withLinaria, { LinariaConfig } from 'next-with-linaria';
 
-/** @type {import('next-with-linaria').LinariaConfig} */
-const config = {
+const config: LinariaConfig = {
   // ...your next.js config
   linaria: {
     // Linaria options here
   },
 };
 
-module.exports = withRspack(withLinaria(config));
+export default withRspack(withLinaria(config));
 ```
 
 Now you can use linaria in all the places where Next.js also allows you to use [CSS Modules](https://beta.nextjs.org/docs/styling/css-modules). That currently means in every file in the `app` directory and the `pages` directory.
@@ -93,7 +94,9 @@ const config = {
 module.exports = withLinaria(config);
 ```
 
-## Global Styles Restrictions
+## Restrictions
+
+### Global Styles
 
 If you want to use linaria for [global styling](https://beta.nextjs.org/docs/styling/global-styles), you need to place those styles into a file with the suffix `.linaria.global.(js|jsx|ts|tsx)`:
 
@@ -139,3 +142,39 @@ export default function RootLayout({
 ```
 
 This convention is needed because the loader needs to know which files contain global styles and which don't.
+
+## Limitations
+
+- In Webpack and Rspack you can not use linaria styles in server-only files or in server components that import server-only files due to the way HMR works in dev mode.
+
+```tsx
+// app/components/ServerOnlyComponent.tsx
+import 'server-only';
+import { styled } from '@linaria/react';
+
+const Container = styled.div`
+  color: red;
+`;
+
+export default function ServerOnlyComponent() {
+  return <Container>Hello World</Container>;
+}
+```
+
+In such a case you need to use the following approach:
+
+```tsx
+// app/components/Container.tsx
+import { styled } from '@linaria/react';
+export const Container = styled.div`
+  color: red;
+`;
+
+// app/components/ServerOnlyComponent.tsx
+import 'server-only';
+import { Container } from './Container';
+
+export default function ServerOnlyComponent() {
+  return <Container>Hello World</Container>;
+}
+```

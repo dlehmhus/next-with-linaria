@@ -1,20 +1,22 @@
 import withRspack from 'next-rspack';
 
-import withLinaria from '../../../../';
+import withLinaria, { LinariaConfig } from '../../../../';
 
-/** @type {import('../../../../').LinariaConfig} */
-const config = {
+const config: LinariaConfig = {
   transpilePackages: ['ui-kit'],
   typescript: {
     ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   linaria: {
     fastCheck: true,
   },
 };
 
-// Use environment variable to toggle between webpack and rspack
-const enableRspack = process.env.USE_RSPACK !== 'false';
+// // Use environment variable to toggle between webpack and rspack
+const enableRspack = process.env.USE_RSPACK === 'true';
 
 let nextConfig;
 
