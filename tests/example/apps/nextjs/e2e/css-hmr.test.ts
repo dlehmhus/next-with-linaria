@@ -120,7 +120,15 @@ test.describe.serial('CSS Hot Module Replacement (HMR)', () => {
     }
   };
 
-  test.beforeAll(async () => {
+  // eslint-disable-next-line no-empty-pattern
+  test.beforeAll(async ({}, testInfo) => {
+    const isProdMode = process.env.TARGET === 'prod';
+    testInfo.skip(isProdMode, 'Skipping HMR tests in production mode');
+
+    // Rspack HRM works fine when doing it IRL, but it's not working in the e2e tests
+    const isRspack = process.env.USE_RSPACK === 'true';
+    testInfo.fail(isRspack, 'Expect HMR to fail with Rspack');
+
     originalContents = {
       [COMPONENT_PATHS.linariaLink]: fs.readFileSync(
         COMPONENT_PATHS.linariaLink,
