@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/nodemon.json",
   "watch": ["next.config.ts", "../../../../lib/"],
-  "exec": "USE_RSPACK=${USE_RSPACK:-0} pnpm exec next dev --port ${PORT:-3001}",
+  "exec": "USE_RSPACK=${USE_RSPACK:-0} pnpm exec next dev --port ${PORT:-3001} ${USE_TURBOPACK:+--turbopack}",
   "ignore": [".next/"]
 }

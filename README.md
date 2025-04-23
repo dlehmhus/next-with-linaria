@@ -34,7 +34,7 @@ This package provides seamless integration between Next.js and Linaria, a zero-r
 
 ## Usage
 
-### Webpack / Turbopack\*
+### Webpack / Turbopack
 
 ```ts
 // next.config.ts
@@ -43,14 +43,12 @@ import withLinaria, { LinariaConfig } from 'next-with-linaria';
 const config: LinariaConfig = {
   // ...your next.js config
   linaria: {
-    // Linaria options here
+    // Linaria options
   },
 };
 
 export default withLinaria(config);
 ```
-
-\*The Turbopack loader currently only works for client components due to a [bug](https://github.com/vercel/next.js/issues/78096) in Turbopack.
 
 ### Rspack
 
@@ -64,7 +62,7 @@ import withLinaria, { LinariaConfig } from 'next-with-linaria';
 const config: LinariaConfig = {
   // ...your next.js config
   linaria: {
-    // Linaria options here
+    // Linaria options
   },
 };
 

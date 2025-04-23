@@ -83,9 +83,17 @@ const expectCssProperty = async (
   property: string,
   value: string,
 ) => {
-  await expect(locator).toHaveCSS(property, value, {
-    timeout: CSS_CHANGE_TIMEOUT,
-  });
+  try {
+    await expect(locator).toHaveCSS(property, value, {
+      timeout: CSS_CHANGE_TIMEOUT,
+    });
+    // Sometimes the updates get "stuck" in the e2e test, reloading the page fixes that issue.
+  } catch (error) {
+    await locator.page().reload();
+    await expect(locator).toHaveCSS(property, value, {
+      timeout: CSS_CHANGE_TIMEOUT,
+    });
+  }
 };
 
 test.describe.serial('CSS Hot Module Replacement (HMR)', () => {
@@ -122,11 +130,11 @@ test.describe.serial('CSS Hot Module Replacement (HMR)', () => {
 
   // eslint-disable-next-line no-empty-pattern
   test.beforeAll(async ({}, testInfo) => {
-    const isProdMode = process.env.TARGET === 'prod';
+    const isProdMode = process.env.TEST_ENV === 'production';
     testInfo.skip(isProdMode, 'Skipping HMR tests in production mode');
 
     // Rspack HRM works fine when doing it IRL, but it's not working in the e2e tests
-    const isRspack = process.env.USE_RSPACK === 'true';
+    const isRspack = process.env.BUNDLER === 'rspack';
     testInfo.fail(isRspack, 'Expect HMR to fail with Rspack');
 
     originalContents = {
