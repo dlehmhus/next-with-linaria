@@ -135,7 +135,10 @@ test.describe.serial('CSS Hot Module Replacement (HMR)', () => {
 
     // Rspack HRM works fine when doing it IRL, but it's not working in the e2e tests
     const isRspack = process.env.BUNDLER === 'rspack';
-    testInfo.fail(isRspack, 'Expect HMR to fail with Rspack');
+    testInfo.skip(
+      isRspack,
+      'Skipping Rspack until https://github.com/vercel/next.js/discussions/77800#discussioncomment-12865215 is resolved',
+    );
 
     originalContents = {
       [COMPONENT_PATHS.linariaLink]: fs.readFileSync(
