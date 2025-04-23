@@ -6,7 +6,7 @@ const containerStyle = css`
   display: flex;
   gap: 20px;
   content: 'Server Container';
-  outline: 1rem solid none;
+  outline: 1rem solid transparent;
 `;
 
 const ServerContainer: React.FC<React.PropsWithChildren> = ({ children }) => {

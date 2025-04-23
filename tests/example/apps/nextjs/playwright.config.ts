@@ -1,21 +1,33 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
 
-const { CI: isCI = false, TARGET } = process.env;
+const { CI: isCI = false, TEST_ENV } = process.env;
 
 const port = 3200;
 
-const devConfig = {
-  type: 'development',
-  command: `pnpm exec next dev --port ${port}`,
-};
+const BUNDLER = process.env.BUNDLER || 'webpack';
+const IS_RSPACK = BUNDLER === 'rspack';
+const IS_TURBOPACK = BUNDLER === 'turbopack';
 
-const prodConfig = {
-  type: 'production',
-  command: `pnpm run build && pnpm run start -p ${port}`,
-};
+const useRspackEnv = `cross-env USE_RSPACK=${IS_RSPACK}`;
+const turbopackFlag = IS_TURBOPACK ? '--turbopack' : '';
+const nextCommandPrefix = `${useRspackEnv} pnpm exec next`;
 
-export const webServer = TARGET === 'dev' ? devConfig : prodConfig;
+let webServerConfig: { command: string; type: string };
+
+if (TEST_ENV === 'development') {
+  webServerConfig = {
+    type: 'development',
+    command: `${nextCommandPrefix} dev -p ${port} ${turbopackFlag}`,
+  };
+} else {
+  webServerConfig = {
+    type: 'production',
+    command: `${nextCommandPrefix} build ${turbopackFlag} && pnpm exec next start -p ${port}`,
+  };
+}
+
+export const webServer = webServerConfig;
 
 const config: PlaywrightTestConfig = {
   forbidOnly: !!isCI,
@@ -30,6 +42,7 @@ const config: PlaywrightTestConfig = {
     reuseExistingServer: !isCI,
   },
   use: {
+    baseURL: `http://localhost:${port}`,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },

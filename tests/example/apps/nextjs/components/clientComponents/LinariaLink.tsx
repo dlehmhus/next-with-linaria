@@ -8,7 +8,7 @@ const Container = styled.div`
   content: 'Linaria Link';
 `;
 
-export default function LinariaButton() {
+export default function LinariaLink() {
   return (
     <Link href="/posts" prefetch={false}>
       <Container data-testid="linaria-button">Linaria: Client Link</Container>
