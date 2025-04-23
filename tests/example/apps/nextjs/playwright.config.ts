@@ -9,7 +9,7 @@ const BUNDLER = process.env.BUNDLER || 'webpack';
 const IS_RSPACK = BUNDLER === 'rspack';
 const IS_TURBOPACK = BUNDLER === 'turbopack';
 
-const useRspackEnv = `USE_RSPACK=${IS_RSPACK}`;
+const useRspackEnv = `cross-env USE_RSPACK=${IS_RSPACK}`;
 const turbopackFlag = IS_TURBOPACK ? '--turbopack' : '';
 const nextCommandPrefix = `${useRspackEnv} pnpm exec next`;
 
