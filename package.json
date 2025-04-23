@@ -1,6 +1,6 @@
 {
   "name": "next-with-linaria",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Linaria support for Next.js App Router",
   "main": "lib/with-linaria.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "eslint-plugin-unused-imports": "4.1.4",
     "is-ci": "4.1.0",
     "lint-staged": "15.5.0",
-    "next": "15.3.0-canary.44",
+    "next": "15.4.0-canary.5",
     "prettier": "3.5.3",
     "simple-git-hooks": "2.12.1",
     "typescript": "5.8.2",
@@ -37,10 +37,6 @@
     "@babel/runtime": "7.x",
     "@wyw-in-js/babel-preset": "0.x",
     "@wyw-in-js/transform": "0.x"
-  },
-  "dependencies": {
-    "file-system-cache": "2.4.4",
-    "fs-extra": "11.3.0"
   },
   "files": [
     "lib"
@@ -72,6 +68,7 @@
     "next.js",
     "css",
     "rspack",
+    "turbopack",
     "webpack"
   ]
 }
