@@ -60,7 +60,7 @@ const turbopackTransformLoader: LoaderType = function (
       root: process.cwd(),
       pluginOptions,
     },
-    cache, // Known issue: https://github.com/Anber/wyw-in-js/issues/134
+    cache,
   } as PartialServices;
 
   transform(transformServices, contentStr, asyncResolve).then(
