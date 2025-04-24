@@ -105,6 +105,7 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
           /// The "!=!" syntax tells webpack to use specific loaders for this import
           /// The "?" parameter is needed for Next.js compatibility as it ignores the "!=!" directive
           /// The "css=" parameter is used to pass the compressed CSS to the output loader
+
           const importStatement = `import "./${cssFilename}!=!./${filename}?./${cssFilename}?css=${encodedCss}"`;
 
           const finalCode = insertImportStatement(result.code, importStatement);
