@@ -9,7 +9,8 @@ export function insertImportStatement(
   importStatement: string,
 ): string {
   // Check for existing import statements
-  const importRegex = /import\s+[\s\S]*?;/g;
+  const importRegex =
+    /^\s*(?:import\s+[^;]+?\s+from\s+["'][^"']+["'];|import\s*["'][^"']+["'];)/gm;
   const importMatches = [...content.matchAll(importRegex)];
 
   // Case 1: Insert after the last import statement
