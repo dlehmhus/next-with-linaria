@@ -2,6 +2,8 @@
  * This was inspired by  https://github.com/callstack/linaria/blob/462739a781e31d5a8266957c0a4800292f452441/packages/webpack5-loader/src/index.ts
  */
 
+import zlib from 'node:zlib';
+
 import type { PluginOptions, Preprocessor, Result } from '@wyw-in-js/transform';
 import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
 import { PartialServices } from '@wyw-in-js/transform/types/transform/helpers/withDefaultServices';
@@ -75,7 +77,7 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
       root: process.cwd(),
       pluginOptions,
     },
-    cache, // Known issue: https://github.com/Anber/wyw-in-js/issues/134
+    cache,
   } as PartialServices;
 
   transform(transformServices, contentStr, asyncResolve).then(
@@ -90,19 +92,19 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
         );
 
         try {
-          const isGlobalStyle = filename.endsWith(LINARIA_GLOBAL_EXTENSION);
+          const compressedCss = zlib.gzipSync(cssText);
+          const encodedCss = Buffer.from(compressedCss).toString('base64');
 
+          const isGlobalStyle = filename.endsWith(LINARIA_GLOBAL_EXTENSION);
           const cssSuffix = isGlobalStyle
             ? `${LINARIA_GLOBAL_EXTENSION}.css`
             : `${LINARIA_MODULE_EXTENSION}.css`;
-
           const cssFilename = `${filename}${cssSuffix}`;
-          const encodedCss = Buffer.from(cssText).toString('base64');
 
-          /// Example: import "./Component.linaria.module.css!=!./Component?./Component.linaria.module.css"
+          /// Example: import "./Component.linaria.module.css!=!./Component?./Component.linaria.module.css?css=..."
           /// The "!=!" syntax tells webpack to use specific loaders for this import
           /// The "?" parameter is needed for Next.js compatibility as it ignores the "!=!" directive
-          /// Format: "./{basename}.linaria.module.css!=!./{basename}?./{basename}.linaria.module.css"
+          /// The "css=" parameter is used to pass the compressed CSS to the output loader
           const importStatement = `import "./${cssFilename}!=!./${filename}?./${cssFilename}?css=${encodedCss}"`;
 
           const finalCode = insertImportStatement(result.code, importStatement);

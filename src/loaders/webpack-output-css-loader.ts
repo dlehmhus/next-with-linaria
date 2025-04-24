@@ -1,3 +1,5 @@
+import zlib from 'node:zlib';
+
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
 type LoaderType = RawLoaderDefinitionFunction;
@@ -12,9 +14,10 @@ const cssOutputLoader: LoaderType = function () {
     return;
   }
 
-  const decodedCss = Buffer.from(css, 'base64').toString();
+  const decodedCss = Buffer.from(css, 'base64');
+  const decompressedCss = zlib.gunzipSync(decodedCss);
 
-  callback(null, decodedCss, undefined);
+  callback(null, decompressedCss.toString('utf-8'), undefined);
 };
 
 export default cssOutputLoader;
