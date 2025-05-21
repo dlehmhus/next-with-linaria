@@ -19,7 +19,11 @@ const turbopackTransformLoader: LoaderType = function (
 ) {
   this.async();
 
-  const { fastCheck = true, ...pluginOptions } = this.getOptions() || {};
+  const {
+    fastCheck = true,
+    prefixer = true,
+    ...pluginOptions
+  } = this.getOptions() || {};
 
   const contentStr = content.toString();
 
@@ -58,6 +62,7 @@ const turbopackTransformLoader: LoaderType = function (
       filename: this.resourcePath,
       inputSourceMap: convertSourceMap(inputSourceMap, this.resourcePath),
       root: process.cwd(),
+      prefixer,
       pluginOptions,
     },
     cache,

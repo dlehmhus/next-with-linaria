@@ -8,6 +8,11 @@ export type LinariaTransformLoaderOptions = {
    * @default true
    */
   fastCheck?: boolean;
+  /**
+   * Eanbles a prefixer for css rules.
+   * @default true
+   */
+  prefixer?: boolean;
 } & Partial<Omit<PluginOptions, 'sourceMaps'>>;
 
 export type WithLinariaConfig = NextConfig & {
