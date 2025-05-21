@@ -22,6 +22,11 @@ export type LinariaLoaderOptions = {
    * @default false
    */
   fastCheck?: boolean;
+  /**
+   * Eanbles a prefixer for css rules.
+   * @default true
+   */
+  prefixer?: boolean;
   preprocessor?: Preprocessor;
   sourceMap?: boolean;
 } & Partial<PluginOptions>;
@@ -36,7 +41,11 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
   // tell Webpack this loader is async
   this.async();
 
-  const { fastCheck = true, ...pluginOptions } = this.getOptions() || {};
+  const {
+    fastCheck = true,
+    prefixer = true,
+    ...pluginOptions
+  } = this.getOptions() || {};
 
   const contentStr = content.toString();
 
@@ -75,6 +84,7 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
       filename: this.resourcePath,
       inputSourceMap: convertSourceMap(inputSourceMap, this.resourcePath),
       root: process.cwd(),
+      prefixer,
       pluginOptions,
     },
     cache,

@@ -70,6 +70,11 @@ export type LinariaConfig = NextConfig & {
      * @default false
      */
     fastCheck?: boolean;
+    /**
+     * Eanbles a prefixer for css rules.
+     * @default true
+     */
+    prefixer?: boolean;
   };
 };
 
