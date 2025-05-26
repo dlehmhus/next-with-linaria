@@ -67,9 +67,14 @@ export type LinariaConfig = NextConfig & {
     /**
      * Enables a quick syntax check to skip transform for files that don't contain Linaria code.
      * This can significantly improve performance for large projects.
-     * @default false
+     * @default true
      */
     fastCheck?: boolean;
+    /**
+     * Eanbles a prefixer for css rules.
+     * @default true
+     */
+    prefixer?: boolean;
   };
 };
 

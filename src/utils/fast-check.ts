@@ -20,10 +20,10 @@ export function performFastCheck(
   // Show the fastCheck message once per build
   if (fastCheck && !fastCheckMessageShown) {
     logger.info(
-      'Linaria fastCheck optimization enabled - skipping transform for files without Linaria syntax',
+      'Linaria fastCheck optimization enabled - skipping transform for files without Linaria syntax.',
     );
     logger.info(
-      'If you experience styling issues, try disabling fastCheck in your webpack config',
+      'If you experience styling issues, try disabling fastCheck in your next.config file.',
     );
     fastCheckMessageShown = true;
   }
