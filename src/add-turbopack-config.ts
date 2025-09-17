@@ -21,32 +21,13 @@ export function addTurbopackConfig({
     },
   };
 
-  // TODO: re-enable this once https://github.com/vercel/next.js/issues/79592 is fixed
-  // and remove the regex approach below
-
-  // if (config.turbopack.rules['*.{ts,tsx,js,jsx}']) {
-  //   // @ts-expect-error Turbopack only allows for primitive options that can be serialized to JSON
-  //   // but the default linaria options include functions. We ignore this for now.
-  //   config.turbopack.rules['*.{ts,tsx,js,jsx}'].loaders.push(linariaLoader);
-  // } else {
-  //   // @ts-expect-error Turbopack only allows for primitive options that can be serialized to JSON
-  //   config.turbopack.rules['*.{ts,tsx,js,jsx}'] = {
-  //     loaders: [linariaLoader],
-  //   };
-  // }
-
-  const conditionId = '#linaria-loader';
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config.turbopack.conditions ??= {};
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config.turbopack.conditions[conditionId] = {
-    path: /^(?!.*middleware\.(tsx?|jsx?)$).*\.(tsx?|jsx?)$/,
-  };
-
-  // @ts-expect-error Turbopack only allows for primitive options that can be serialized to JSON
-  // but the default linaria options include functions. We ignore this for now.
-  config.turbopack.rules[conditionId] = {
+  config.turbopack.rules['*.{ts,tsx,js,jsx}'] = {
+    condition: {
+      // TODO: can be removed once https://github.com/vercel/next.js/issues/79592 is fixed
+      not: { path: /middleware\.(tsx?|jsx?)$/ },
+    },
+    // @ts-expect-error Turbopack only allows for primitive options that can be serialized to JSON
+    // but the default linaria options include functions. We ignore this for now.
     loaders: [linariaLoader],
   };
 
