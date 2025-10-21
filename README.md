@@ -8,7 +8,12 @@ This package provides seamless integration between Next.js and Linaria, a zero-r
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/next-with-linaria?file=app%2Fpage.tsx)
 
+
+
 ## Installation
+
+> [!NOTE]  
+> If you want to use the package with turbopack and the latest Next.js canary, you need to install next-with-linaria@canary as well.
 
 <details open><summary>npm</summary>
 
