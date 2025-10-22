@@ -10,6 +10,9 @@ This package provides seamless integration between Next.js and Linaria, a zero-r
 
 ## Installation
 
+> [!IMPORTANT]  
+> Next.js 16 requires next-with-linaria version 1.3.0 or higher.
+
 <details open><summary>npm</summary>
 
 ```sh
