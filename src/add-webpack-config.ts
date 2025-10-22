@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextConfig } from 'next';
 import type * as NextServer from 'next/dist/server/config-shared';
 import path from 'path';
