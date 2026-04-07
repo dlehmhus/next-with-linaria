@@ -69,7 +69,7 @@ const config: LinariaConfig = {
   },
 };
 
-export default withRspack(withLinaria(config));
+export default withLinaria(withRspack(config));
 ```
 
 Now you can use linaria in all the places where Next.js also allows you to use [CSS Modules](https://beta.nextjs.org/docs/styling/css-modules). That currently means in every file in the `app` directory and the `pages` directory.
