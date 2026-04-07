@@ -5,3 +5,4 @@ test-results/
 .DS_Store
 tests/example/apps/nextjs/.vscode/settings.json
 .cursorrules
+.pnpm-store

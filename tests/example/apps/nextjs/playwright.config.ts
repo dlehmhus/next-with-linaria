@@ -5,12 +5,12 @@ const { CI: isCI = false, TEST_ENV } = process.env;
 
 const port = 3200;
 
-const BUNDLER = process.env.BUNDLER || 'webpack';
+const BUNDLER = process.env.BUNDLER || 'turbopack';
 const IS_RSPACK = BUNDLER === 'rspack';
-const IS_TURBOPACK = BUNDLER === 'turbopack';
+const IS_WEBPACK = BUNDLER === 'webpack';
 
 const useRspackEnv = `cross-env USE_RSPACK=${IS_RSPACK}`;
-const turbopackFlag = IS_TURBOPACK ? '--turbopack' : '';
+const webpackFlag = IS_WEBPACK ? '--webpack' : '';
 const nextCommandPrefix = `${useRspackEnv} pnpm exec next`;
 
 let webServerConfig: { command: string; type: string };
@@ -18,12 +18,12 @@ let webServerConfig: { command: string; type: string };
 if (TEST_ENV === 'development') {
   webServerConfig = {
     type: 'development',
-    command: `${nextCommandPrefix} dev -p ${port} ${turbopackFlag}`,
+    command: `${nextCommandPrefix} dev -p ${port} ${webpackFlag}`,
   };
 } else {
   webServerConfig = {
     type: 'production',
-    command: `${nextCommandPrefix} build ${turbopackFlag} && pnpm exec next start -p ${port}`,
+    command: `${nextCommandPrefix} build ${webpackFlag} && pnpm exec next start -p ${port}`,
   };
 }
 
