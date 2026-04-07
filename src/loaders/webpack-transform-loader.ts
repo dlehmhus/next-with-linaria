@@ -37,6 +37,61 @@ type LoaderType = RawLoaderDefinitionFunction<
 
 const cache = new TransformCacheCollection();
 
+type Resolver = (
+  what: string,
+  importer: string,
+  stack: string[],
+) => Promise<string>;
+
+const resolvers: Record<string, Resolver[]> = {};
+
+const stripQueryAndHash = (request: string) => {
+  const queryIdx = request.indexOf('?');
+  const hashIdx = request.indexOf('#');
+  if (queryIdx === -1)
+    return hashIdx === -1 ? request : request.slice(0, hashIdx);
+  if (hashIdx === -1) return request.slice(0, queryIdx);
+  return request.slice(0, Math.min(queryIdx, hashIdx));
+};
+
+const getResolverKey = (importer: string, stack: string[]): string => {
+  const root = stack.length ? stack[stack.length - 1] : importer;
+  return stripQueryAndHash(root);
+};
+
+const asyncResolve = (
+  what: string,
+  importer: string,
+  stack: string[] = [importer],
+): Promise<string> => {
+  const key = getResolverKey(importer, stack);
+  const resolver = resolvers[key];
+  if (!resolver || resolver.length === 0) {
+    throw new Error(`No resolver found for ${key}`);
+  }
+
+  return Promise.all(resolver.map((r) => r(what, importer, stack))).then(
+    (results) => {
+      const firstResult = results[0];
+      if (results.some((r) => r !== firstResult)) {
+        throw new Error('Resolvers returned different results');
+      }
+      return firstResult;
+    },
+  );
+};
+
+function addResolver(resourcePath: string, resolver: Resolver) {
+  const key = stripQueryAndHash(resourcePath);
+  if (!resolvers[key]) {
+    resolvers[key] = [];
+  }
+  resolvers[key].push(resolver);
+  return () => {
+    resolvers[key] = resolvers[key].filter((r) => r !== resolver);
+  };
+}
+
 const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
   // tell Webpack this loader is async
   this.async();
@@ -55,24 +110,28 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
     return;
   }
 
-  const asyncResolve = (token: string, importer: string): Promise<string> => {
-    const context = path.isAbsolute(importer)
-      ? path.dirname(importer)
-      : path.join(process.cwd(), path.dirname(importer));
+  const removeResolver = addResolver(this.resourcePath, (what, importer) => {
+    const importerPath = stripQueryAndHash(importer);
+    const context = path.isAbsolute(importerPath)
+      ? path.dirname(importerPath)
+      : path.join(process.cwd(), path.dirname(importerPath));
+
     return new Promise((resolve, reject) => {
-      this.resolve(context, token, (err, result) => {
+      this.resolve(context, what, (err, result) => {
         if (err) {
-          console.error(err);
           reject(err);
         } else if (result) {
-          this.addDependency(result);
+          const filePath = stripQueryAndHash(result);
+          if (path.isAbsolute(filePath)) {
+            this.addDependency(filePath);
+          }
           resolve(result);
         } else {
-          reject(new Error(`Cannot resolve ${token}`));
+          reject(new Error(`Cannot resolve ${what}`));
         }
       });
     });
-  };
+  });
 
   const filename = path.basename(
     this.resourcePath,
@@ -90,8 +149,8 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
     cache,
   } as PartialServices;
 
-  transform(transformServices, contentStr, asyncResolve).then(
-    async (result: Result) => {
+  transform(transformServices, contentStr, asyncResolve)
+    .then(async (result: Result) => {
       if (result.cssText) {
         const { cssText } = result;
 
@@ -129,9 +188,9 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
       }
 
       this.callback(null, result.code, result.sourceMap ?? undefined);
-    },
-    (err: Error) => this.callback(err),
-  );
+    })
+    .catch((err: Error) => this.callback(err))
+    .finally(removeResolver);
 };
 
 export default webpackTransformLoader;

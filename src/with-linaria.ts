@@ -5,12 +5,12 @@ import type { WithLinariaConfig } from './types';
 export type LinariaConfig = WithLinariaConfig;
 
 export default function withLinaria(config: WithLinariaConfig) {
-  const useTurbopack = process.env.TURBOPACK;
-  if (useTurbopack) {
-    return addTurbopackConfig(config);
-  } else {
-    return addWebpackConfig(config);
-  }
+  let configWithLinaria = config;
+
+  configWithLinaria = addTurbopackConfig(configWithLinaria);
+  configWithLinaria = addWebpackConfig(configWithLinaria);
+
+  return configWithLinaria;
 }
 
 module.exports = withLinaria;

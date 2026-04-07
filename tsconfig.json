@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "lib",
+    "rootDir": "src",
     "target": "es2017",
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "nodenext",
     "lib": ["es2016"],
-    "moduleResolution": "node",
     "sourceMap": true,
     "declaration": true,
     "noImplicitAny": false,
@@ -15,5 +15,5 @@
     "skipLibCheck": true
   },
   "exclude": ["lib"],
-  "include": ["src/**/*", "types/**/*"]
+  "include": ["src/**/*"]
 }

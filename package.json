@@ -7,37 +7,33 @@
     "build": "tsc",
     "watch": "tsc -w",
     "clean": "rm -rf lib",
-    "lint": "eslint --fix src/**",
-    "test": "pnpm test --filter ./tests/example",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "test": "pnpm --filter ./tests/example run test",
     "prepublish": "pnpm run clean && pnpm run build"
   },
-  "packageManager": "pnpm@8.15.0",
+  "packageManager": "pnpm@10.33.0",
   "devDependencies": {
-    "@rspack/core": "1.5.5",
+    "@rspack/core": "1.7.11",
     "@types/fs-extra": "11.0.4",
-    "@typescript-eslint/eslint-plugin": "8.44.0",
-    "@typescript-eslint/parser": "8.44.0",
-    "@wyw-in-js/babel-preset": "0.7.0",
-    "@wyw-in-js/transform": "0.7.0",
-    "eslint": "9.35.0",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-typescript-sort-keys": "3.3.0",
-    "eslint-plugin-unused-imports": "4.2.0",
-    "globals": "16.4.0",
+    "@wyw-in-js/babel-preset": "1.0.7",
+    "@wyw-in-js/transform": "1.0.7",
+    "globals": "17.4.0",
     "is-ci": "4.1.0",
-    "lint-staged": "16.1.6",
-    "next": "16.0.0",
-    "prettier": "3.6.2",
+    "lint-staged": "16.4.0",
+    "next": "16.2.2",
+    "oxfmt": "0.44.0",
+    "oxlint": "1.59.0",
     "simple-git-hooks": "2.13.1",
-    "typescript": "5.9.2",
-    "webpack": "5.101.3"
+    "typescript": "6.0.2",
+    "webpack": "5.105.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.x",
-    "@wyw-in-js/babel-preset": "0.x",
-    "@wyw-in-js/transform": "0.x"
+    "@wyw-in-js/babel-preset": "1.x",
+    "@wyw-in-js/transform": "1.x"
   },
   "files": [
     "lib"
@@ -47,10 +43,10 @@
   },
   "lint-staged": {
     "**/*.(js|jsx|ts|tsx)": [
-      "eslint --fix"
+      "oxlint --fix"
     ],
     "**/*.(js|jsx|ts|tsx|json|css|md|mdx)": [
-      "prettier --write"
+      "oxfmt"
     ]
   },
   "author": "Dario Lehmhus",
