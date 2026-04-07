@@ -5,5 +5,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "npm.packageManager": "pnpm"
+  "npm.packageManager": "pnpm",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true
 }

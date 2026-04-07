@@ -11,7 +11,7 @@
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "test": "pnpm test --filter ./tests/example",
+    "test": "pnpm --filter ./tests/example run test",
     "prepublish": "pnpm run clean && pnpm run build"
   },
   "packageManager": "pnpm@10.33.0",
