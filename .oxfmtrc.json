@@ -7,5 +7,5 @@
   "tabWidth": 2,
   "printWidth": 80,
   "sortPackageJson": false,
-  "ignorePatterns": []
+  "ignorePatterns": ["tests/example/apps/nextjs/next-env.d.ts"]
 }

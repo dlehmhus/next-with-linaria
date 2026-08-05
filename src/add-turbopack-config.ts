@@ -26,8 +26,6 @@ export function addTurbopackConfig({
       // TODO: can be removed once https://github.com/vercel/next.js/issues/79592 is fixed
       not: { path: /middleware\.(tsx?|jsx?)$/ },
     },
-    // @ts-expect-error Turbopack only allows for primitive options that can be serialized to JSON
-    // but the default linaria options include functions. We ignore this for now.
     loaders: [linariaLoader],
   };
 

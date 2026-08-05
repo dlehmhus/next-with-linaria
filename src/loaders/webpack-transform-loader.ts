@@ -6,7 +6,6 @@ import zlib from 'node:zlib';
 
 import type { PluginOptions, Preprocessor, Result } from '@wyw-in-js/transform';
 import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
-import { PartialServices } from '@wyw-in-js/transform/types/transform/helpers/withDefaultServices';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
@@ -34,6 +33,10 @@ export type LinariaLoaderOptions = {
 type LoaderType = RawLoaderDefinitionFunction<
   LinariaLoaderOptions & { name: string }
 >;
+
+// `@wyw-in-js/transform` does not export the services type of `transform`, and its
+// package `exports` map blocks deep imports, so derive it from the function itself.
+type TransformServices = Parameters<typeof transform>[0];
 
 const cache = new TransformCacheCollection();
 
@@ -138,7 +141,7 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
     path.extname(this.resourcePath),
   );
 
-  const transformServices = {
+  const transformServices: TransformServices = {
     options: {
       filename: this.resourcePath,
       inputSourceMap: convertSourceMap(inputSourceMap, this.resourcePath),
@@ -147,7 +150,7 @@ const webpackTransformLoader: LoaderType = function (content, inputSourceMap) {
       pluginOptions,
     },
     cache,
-  } as PartialServices;
+  };
 
   transform(transformServices, contentStr, asyncResolve)
     .then(async (result: Result) => {
