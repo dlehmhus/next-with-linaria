@@ -1,6 +1,5 @@
 import type { Result } from '@wyw-in-js/transform';
 import { transform, TransformCacheCollection } from '@wyw-in-js/transform';
-import { PartialServices } from '@wyw-in-js/transform/types/transform/helpers/withDefaultServices';
 import path from 'path';
 import type { RawLoaderDefinitionFunction } from 'webpack';
 
@@ -10,6 +9,10 @@ import { insertImportStatement } from '../utils/insert-import';
 import { convertSourceMap } from '../utils/source-map';
 
 type LoaderType = RawLoaderDefinitionFunction<LinariaTransformLoaderOptions>;
+
+// `@wyw-in-js/transform` does not export the services type of `transform`, and its
+// package `exports` map blocks deep imports, so derive it from the function itself.
+type TransformServices = Parameters<typeof transform>[0];
 
 const cache = new TransformCacheCollection();
 
@@ -57,7 +60,7 @@ const turbopackTransformLoader: LoaderType = function (
     }
   };
 
-  const transformServices: PartialServices = {
+  const transformServices: TransformServices = {
     options: {
       filename: this.resourcePath,
       inputSourceMap: convertSourceMap(inputSourceMap, this.resourcePath),
@@ -66,7 +69,7 @@ const turbopackTransformLoader: LoaderType = function (
       pluginOptions,
     },
     cache,
-  } as PartialServices;
+  };
 
   transform(transformServices, contentStr, asyncResolve).then(
     async (result: Result) => {

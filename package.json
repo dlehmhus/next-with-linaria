@@ -1,6 +1,6 @@
 {
   "name": "next-with-linaria",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Linaria support for Next.js App Router",
   "main": "lib/with-linaria.js",
   "scripts": {
@@ -16,24 +16,24 @@
   },
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
-    "@rspack/core": "1.7.11",
+    "@rspack/core": "2.1.10",
     "@types/fs-extra": "11.0.4",
-    "@wyw-in-js/babel-preset": "1.0.7",
-    "@wyw-in-js/transform": "1.0.7",
-    "globals": "17.4.0",
+    "@wyw-in-js/babel-preset": "2.4.2",
+    "@wyw-in-js/transform": "2.4.2",
+    "globals": "17.11.0",
     "is-ci": "4.1.0",
-    "lint-staged": "16.4.0",
-    "next": "16.2.2",
-    "oxfmt": "0.44.0",
-    "oxlint": "1.59.0",
+    "lint-staged": "17.3.0",
+    "next": "16.3.2",
+    "oxfmt": "0.64.0",
+    "oxlint": "1.79.0",
     "simple-git-hooks": "2.13.1",
-    "typescript": "6.0.2",
-    "webpack": "5.105.4"
+    "typescript": "7.0.2",
+    "webpack": "5.109.2"
   },
   "peerDependencies": {
     "@babel/runtime": "7.x",
-    "@wyw-in-js/babel-preset": "1.x",
-    "@wyw-in-js/transform": "1.x"
+    "@wyw-in-js/babel-preset": "2.x",
+    "@wyw-in-js/transform": "2.x"
   },
   "files": [
     "lib"

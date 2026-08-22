@@ -2,6 +2,7 @@ node_modules/
 .next/
 lib/
 test-results/
+*.tsbuildinfo
 .DS_Store
 tests/example/apps/nextjs/.vscode/settings.json
 .cursorrules

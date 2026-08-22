@@ -9,38 +9,20 @@ importers:
   .:
     dependencies:
       '@linaria/core':
-        specifier: 7.0.0
-        version: 7.0.0
+        specifier: 8.1.1
+        version: 8.1.1
       '@linaria/react':
-        specifier: 7.0.1
-        version: 7.0.1(react@19.2.4)
+        specifier: 8.1.1
+        version: 8.1.1(react@19.2.8)
     devDependencies:
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
       react:
-        specifier: 19.2.4
-        version: 19.2.4
+        specifier: 19.2.8
+        version: 19.2.8
 
 packages:
-
-  '@babel/generator@7.29.1':
-    resolution: {integrity: sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/helper-string-parser@7.27.1':
-    resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/helper-validator-identifier@7.28.5':
-    resolution: {integrity: sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/parser@7.29.2':
-    resolution: {integrity: sha512-4GgRzy/+fsBa72/RZVJmGKPmZu9Byn8o4MoLpmNe1m8ZfYnz5emHLQz3U4gLud6Zwl0RZIcgiLD7Uq7ySFuDLA==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-
-  '@babel/types@7.29.0':
-    resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
-    engines: {node: '>=6.9.0'}
 
   '@emotion/is-prop-valid@1.4.0':
     resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
@@ -48,42 +30,35 @@ packages:
   '@emotion/memoize@0.9.0':
     resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
 
-  '@jridgewell/gen-mapping@0.3.13':
-    resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
+  '@linaria/core@8.1.1':
+    resolution: {integrity: sha512-ykVTiHrUm2aawUBvTheR041elB7RdyqFpckVtvWa1KbtC2TtYEVodYw1Xr1KcqkIUVQQGfK2J4hPBR4Cp8fIZQ==}
+    engines: {node: '>=22.12.0'}
 
-  '@jridgewell/resolve-uri@3.1.2':
-    resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
-    engines: {node: '>=6.0.0'}
-
-  '@jridgewell/sourcemap-codec@1.5.5':
-    resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
-
-  '@jridgewell/trace-mapping@0.3.31':
-    resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
-
-  '@linaria/core@7.0.0':
-    resolution: {integrity: sha512-KRa5XaTNPLFoJawtQnt58tzdt9QrQsUL/u6yEsfYg3d0tcsTecpoHFhT4bPzwuZg9Hie7khTSFhEy+aY84Fo7A==}
-    engines: {node: '>=20.0.0'}
-
-  '@linaria/react@7.0.1':
-    resolution: {integrity: sha512-bPU6vqOxDHhFwf54a4Dbwjc/SPUz1b3BtMRLlp2bWJGeZ85TYf7Gb8Fb+HfTTb6w4EA6QOL0UzkQGlg0EHkqFw==}
-    engines: {node: '>=20.0.0'}
+  '@linaria/react@8.1.1':
+    resolution: {integrity: sha512-hVs9wC4PCkEwOzf3twMyxBlVf8epOkdBd/clNtDMXOJ8ZX7jRB22ZidTbWknOISqbiFSRWk2ZwCTiDrfm38epg==}
+    engines: {node: '>=22.12.0'}
     peerDependencies:
       react: '>=16'
 
-  '@wyw-in-js/processor-utils@1.0.5':
-    resolution: {integrity: sha512-auqbFGVQ+QEkzBaG7drb2OE5fE46H5vh3ZPNRsDABZzJZPV52XbMRLZP4C+EoV/f3kpeyXaOgwvIRhq3UEumUw==}
-    engines: {node: '>=20.0.0'}
+  '@types/react@19.2.18':
+    resolution: {integrity: sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==}
 
-  '@wyw-in-js/shared@1.0.5':
-    resolution: {integrity: sha512-uGLzks3DF/ugFJyetIcWhwBgwEvVv1RfoCzqVIK4pkXVj6b+Fe82WqxNpW4bzMLfATKNln+eFRu/aMdMBnrmaQ==}
-    engines: {node: '>=20.0.0'}
+  '@wyw-in-js/processor-utils@2.1.0':
+    resolution: {integrity: sha512-ksNUkSYIV1vTLwFv+H0R2YcmtERTYKHs+ZuNiBlyJca2t3q5+0OMiS3ZBPSftQEwYSXBW54m15+39qgSQEyTBQ==}
+    engines: {node: '>=22.0.0'}
+
+  '@wyw-in-js/shared@2.1.0':
+    resolution: {integrity: sha512-mh7qtjVrhebafRZWgmat9Aidqbo6SiEtdv0eAMG5n3d8L01FMvz70OAYyXCt7r+2GCAtvfZXsyf1gS8NLZmaRQ==}
+    engines: {node: '>=22.0.0'}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  brace-expansion@2.0.3:
-    resolution: {integrity: sha512-MCV/fYJEbqx68aE58kv2cA/kiky1G8vux3OR6/jbS+jIMe/6fJWa0DTzJU7dqijOWYwHi1t29FlfYI9uytqlpA==}
+  brace-expansion@2.1.4:
+    resolution: {integrity: sha512-hGfVzPxthbf3+2yjg/RBs60cB0FhqBS/zvdV/4wn4/BmN0bNMMHPc4V/BbFieqf1TKAGGAHnY4eSjajCl0f2Xg==}
+
+  csstype@3.2.3:
+    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -94,6 +69,10 @@ packages:
       supports-color:
         optional: true
 
+  es-errors@1.3.0:
+    resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
+    engines: {node: '>= 0.4'}
+
   find-up@5.0.0:
     resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
     engines: {node: '>=10'}
@@ -101,21 +80,16 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  hasown@2.0.2:
-    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
+  hasown@2.0.4:
+    resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
   html-element-attributes@1.3.1:
     resolution: {integrity: sha512-UrRKgp5sQmRnDy4TEwAUsu14XBUlzKB8U3hjIYDjcZ3Hbp86Jtftzxfgrv6E/ii/h78tsaZwAnAE8HwnHr0dPA==}
 
-  is-core-module@2.16.1:
-    resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
+  is-core-module@2.16.2:
+    resolution: {integrity: sha512-evOr8xfXKxE6qSR0hSXL2r3sd7ALj8+7jQEUvPYcm5sgZFdJ+AYzT6yNmJenvIYQBgIGwfwz08sL8zoL7yq2BA==}
     engines: {node: '>= 0.4'}
-
-  jsesc@3.1.0:
-    resolution: {integrity: sha512-/sM3dO2FOzXjKQhJuo0Q173wf2KOo8t4I8vHy6lF9poUp7bKT0/NHE8fPX23PwfhnykfqnC2xRxOnVw5XuGIaA==}
-    engines: {node: '>=6'}
-    hasBin: true
 
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
@@ -146,12 +120,12 @@ packages:
   react-html-attributes@1.4.6:
     resolution: {integrity: sha512-uS3MmThNKFH2EZUQQw4k5pIcU7XIr208UE5dktrj/GOH1CMagqxDl4DCLpt3o2l9x+IB5nVYBeN3Cr4IutBXAg==}
 
-  react@19.2.4:
-    resolution: {integrity: sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==}
+  react@19.2.8:
+    resolution: {integrity: sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==}
     engines: {node: '>=0.10.0'}
 
-  resolve@1.22.11:
-    resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
+  resolve@1.22.12:
+    resolution: {integrity: sha512-TyeJ1zif53BPfHootBGwPRYT1RUt6oGWsaQr8UyZW/eAm9bKoijtvruSDEmZHm92CwS9nj7/fWttqPCgzep8CA==}
     engines: {node: '>= 0.4'}
     hasBin: true
 
@@ -159,39 +133,11 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  ts-invariant@0.10.3:
-    resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==}
-    engines: {node: '>=8'}
-
-  tslib@2.8.1:
-    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
-
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
 snapshots:
-
-  '@babel/generator@7.29.1':
-    dependencies:
-      '@babel/parser': 7.29.2
-      '@babel/types': 7.29.0
-      '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.31
-      jsesc: 3.1.0
-
-  '@babel/helper-string-parser@7.27.1': {}
-
-  '@babel/helper-validator-identifier@7.28.5': {}
-
-  '@babel/parser@7.29.2':
-    dependencies:
-      '@babel/types': 7.29.0
-
-  '@babel/types@7.29.0':
-    dependencies:
-      '@babel/helper-string-parser': 7.27.1
-      '@babel/helper-validator-identifier': 7.28.5
 
   '@emotion/is-prop-valid@1.4.0':
     dependencies:
@@ -199,48 +145,36 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@jridgewell/gen-mapping@0.3.13':
+  '@linaria/core@8.1.1':
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
-      '@jridgewell/trace-mapping': 0.3.31
-
-  '@jridgewell/resolve-uri@3.1.2': {}
-
-  '@jridgewell/sourcemap-codec@1.5.5': {}
-
-  '@jridgewell/trace-mapping@0.3.31':
-    dependencies:
-      '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@linaria/core@7.0.0':
-    dependencies:
-      '@wyw-in-js/processor-utils': 1.0.5
+      '@wyw-in-js/processor-utils': 2.1.0
     transitivePeerDependencies:
       - supports-color
 
-  '@linaria/react@7.0.1(react@19.2.4)':
+  '@linaria/react@8.1.1(react@19.2.8)':
     dependencies:
       '@emotion/is-prop-valid': 1.4.0
-      '@linaria/core': 7.0.0
-      '@wyw-in-js/processor-utils': 1.0.5
-      '@wyw-in-js/shared': 1.0.5
+      '@linaria/core': 8.1.1
+      '@wyw-in-js/processor-utils': 2.1.0
+      '@wyw-in-js/shared': 2.1.0
       minimatch: 9.0.9
-      react: 19.2.4
+      react: 19.2.8
       react-html-attributes: 1.4.6
-      resolve: 1.22.11
-      ts-invariant: 0.10.3
+      resolve: 1.22.12
     transitivePeerDependencies:
       - supports-color
 
-  '@wyw-in-js/processor-utils@1.0.5':
+  '@types/react@19.2.18':
     dependencies:
-      '@babel/generator': 7.29.1
-      '@wyw-in-js/shared': 1.0.5
+      csstype: 3.2.3
+
+  '@wyw-in-js/processor-utils@2.1.0':
+    dependencies:
+      '@wyw-in-js/shared': 2.1.0
     transitivePeerDependencies:
       - supports-color
 
-  '@wyw-in-js/shared@1.0.5':
+  '@wyw-in-js/shared@2.1.0':
     dependencies:
       debug: 4.4.3
       find-up: 5.0.0
@@ -250,13 +184,17 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  brace-expansion@2.0.3:
+  brace-expansion@2.1.4:
     dependencies:
       balanced-match: 1.0.2
+
+  csstype@3.2.3: {}
 
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  es-errors@1.3.0: {}
 
   find-up@5.0.0:
     dependencies:
@@ -265,17 +203,15 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  hasown@2.0.2:
+  hasown@2.0.4:
     dependencies:
       function-bind: 1.1.2
 
   html-element-attributes@1.3.1: {}
 
-  is-core-module@2.16.1:
+  is-core-module@2.16.2:
     dependencies:
-      hasown: 2.0.2
-
-  jsesc@3.1.0: {}
+      hasown: 2.0.4
 
   locate-path@6.0.0:
     dependencies:
@@ -283,7 +219,7 @@ snapshots:
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.0.3
+      brace-expansion: 2.1.4
 
   ms@2.1.3: {}
 
@@ -303,20 +239,15 @@ snapshots:
     dependencies:
       html-element-attributes: 1.3.1
 
-  react@19.2.4: {}
+  react@19.2.8: {}
 
-  resolve@1.22.11:
+  resolve@1.22.12:
     dependencies:
-      is-core-module: 2.16.1
+      es-errors: 1.3.0
+      is-core-module: 2.16.2
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
-
-  ts-invariant@0.10.3:
-    dependencies:
-      tslib: 2.8.1
-
-  tslib@2.8.1: {}
 
   yocto-queue@0.1.0: {}
