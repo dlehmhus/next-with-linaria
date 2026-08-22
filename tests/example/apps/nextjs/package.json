@@ -21,10 +21,10 @@
     "test:ui:turbopack": "cross-env BUNDLER=turbopack pnpm run test:ui"
   },
   "dependencies": {
-    "@linaria/core": "8.1.1",
-    "@linaria/react": "8.1.1",
-    "next": "16.3.0",
-    "next-rspack": "16.3.0",
+    "@linaria/core": "8.2.0",
+    "@linaria/react": "8.2.0",
+    "next": "16.3.2",
+    "next-rspack": "16.3.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "ui-kit": "workspace:*"
@@ -32,15 +32,15 @@
   "devDependencies": {
     "@babel/runtime": "8.0.0",
     "@playwright/test": "1.62.1",
-    "@types/node": "26.1.2",
+    "@types/node": "26.2.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
-    "@wyw-in-js/babel-preset": "2.3.1",
+    "@wyw-in-js/babel-preset": "2.4.2",
     "cross-env": "10.1.0",
-    "eslint": "10.8.0",
-    "eslint-config-next": "16.3.0",
+    "eslint": "10.9.0",
+    "eslint-config-next": "16.3.2",
     "nodemon": "3.1.14",
-    "oxfmt": "^0.62.0",
+    "oxfmt": "^0.64.0",
     "typescript": "7.0.2"
   }
 }
